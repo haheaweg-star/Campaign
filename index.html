@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Western Frontier - World Map</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- World Map View -->
+        <div class="world-map-container" id="worldMapContainer">
+            <h1 class="world-map-title">Western Frontier</h1>
+            <div class="poptropica-map">
+                <!-- Map decorations -->
+                <div class="map-decoration map-cloud cloud-1"></div>
+                <div class="map-decoration map-cloud cloud-2"></div>
+                <div class="map-decoration map-cloud cloud-3"></div>
+                <div class="map-decoration map-cloud cloud-4"></div>
+                <div class="map-decoration map-wave wave-1"></div>
+                <div class="map-decoration map-wave wave-2"></div>
+                
+                <!-- Islands -->
+                <div class="map-island island-1" data-city="1" data-level="0">
+                    <div class="island-building" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="20" y="40" width="60" height="60" fill="%23d4af37"/><polygon points="10,40 50,10 90,40" fill="%23b8860b"/></svg>'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+                    <div class="island-name">Desert Mirage</div>
+                    <div class="island-level">Level 0</div>
+                </div>
+                
+                <div class="map-island island-2" data-city="2" data-level="50">
+                    <div class="island-building" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="30" y="30" width="40" height="50" fill="%234285f4"/><polygon points="20,30 50,10 80,30" fill="%233367d6"/></svg>'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+                    <div class="island-name">Rocket Bay</div>
+                    <div class="island-level">Level 50</div>
+                </div>
+                
+                <div class="map-island island-3" data-city="3" data-level="100">
+                    <div class="island-building" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="25" y="40" width="50" height="50" fill="%23ea4335"/><polygon points="15,40 50,15 85,40" fill="%23c5221f"/><circle cx="50" cy="30" r="15" fill="%23fbbc05"/></svg>'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+                    <div class="island-name">Carnival Core</div>
+                    <div class="island-level">Level 100</div>
+                </div>
+                
+                <div class="map-island island-4" data-city="4" data-level="200">
+                    <div class="island-building" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="20" y="60" width="60" height="30" fill="%238b4513"/><rect x="35" y="40" width="30" height="20" fill="%23a0522d"/><polygon points="25,40 50,20 75,40" fill="%23654321"/></svg>'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+                    <div class="island-name">Treehouse Heights</div>
+                    <div class="island-level">Level 200</div>
+                </div>
+                
+                <div class="map-island island-5" data-city="5" data-level="300">
+                    <div class="island-building" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="30" y="40" width="40" height="50" fill="%23ffffff"/><polygon points="20,40 50,10 80,40" fill="%23e0e0e0"/><rect x="35" y="50" width="30" height="30" fill="%23bbdefb"/></svg>'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+                    <div class="island-name">Frostfall Ridge</div>
+                    <div class="island-level">Level 300</div>
+                </div>
+                
+                <div class="map-island island-6" data-city="6" data-level="400">
+                    <div class="island-building" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="25" y="50" width="50" height="40" fill="%2334a853"/><polygon points="15,50 50,20 85,50" fill="%232d8e47"/><circle cx="30" cy="60" r="5" fill="%23fbbc05"/><circle cx="50" cy="60" r="5" fill="%23ea4335"/><circle cx="70" cy="60" r="5" fill="%234285f4"/></svg>'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+                    <div class="island-name">Jungle Reef</div>
+                    <div class="island-level">Level 400</div>
+                </div>
+                
+                <div class="map-island island-7" data-city="7" data-level="600">
+                    <div class="island-building" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="30" y="40" width="40" height="50" fill="%235f6368"/><polygon points="20,40 50,10 80,40" fill="%233c4043"/><path d="M35,25 Q50,15 65,25" stroke="%23ffffff" stroke-width="3" fill="none"/><circle cx="40" cy="35" r="3" fill="%23ffffff"/><circle cx="60" cy="35" r="3" fill="%23ffffff"/></svg>'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+                    <div class="island-name">Haunted Hollow</div>
+                    <div class="island-level">Level 600</div>
+                </div>
+                
+                <div class="map-island island-8" data-city="8" data-level="750">
+                    <div class="island-building" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="25" y="30" width="50" height="60" fill="%234285f4"/><polygon points="15,30 50,5 85,30" fill="%233367d6"/><rect x="35" y="40" width="30" height="20" fill="%23ffffff"/><rect x="35" y="65" width="30" height="20" fill="%23ffffff"/></svg>'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+                    <div class="island-name">Tech Capital</div>
+                    <div class="island-level">Level 750</div>
+                </div>
+                
+                <div class="map-island island-9" data-city="9" data-level="900">
+                    <div class="island-building" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="30" y="40" width="40" height="50" fill="%23fbbc05"/><polygon points="20,40 50,10 80,40" fill="%23f9ab00"/><rect x="35" y="50" width="30" height="10" fill="%23ea4335"/><rect x="35" y="65" width="30" height="10" fill="%234285f4"/><rect x="35" y="80" width="30" height="10" fill="%2334a853"/></svg>'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+                    <div class="island-name">Candy Corners</div>
+                    <div class="island-level">Level 900</div>
+                </div>
+                
+                <div class="map-island island-10" data-city="10" data-level="1000">
+                    <div class="island-building" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="20" y="50" width="60" height="40" fill="%23ea4335"/><polygon points="10,50 50,20 90,50" fill="%23c5221f"/><rect x="40" y="60" width="20" height="20" fill="%23fbbc05"/></svg>'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+                    <div class="island-name">Peanuts Pier</div>
+                    <div class="island-level">Level 1000</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- City Scene View -->
+        <div class="city-scene-container" id="citySceneContainer">
+            <div class="viewport">
+                <div class="city-scene" id="cityScene">
+                    <div class="fog-of-war" id="fogOfWar"></div>
+                    
+                    <!-- Main Character -->
+                    <div class="character" id="mainCharacter">
+                        <div class="character-legs">
+                            <div class="character-leg">
+                                <div class="character-foot character-foot-left"></div>
+                            </div>
+                            <div class="character-leg">
+                                <div class="character-foot character-foot-right"></div>
+                            </div>
+                        </div>
+                        <div class="character-body"></div>
+                        <div class="character-arm character-arm-left">
+                            <div class="character-hand character-hand-left"></div>
+                        </div>
+                        <div class="character-arm character-arm-right">
+                            <div class="character-hand character-hand-right"></div>
+                        </div>
+                        <div class="character-head">
+                            <div class="character-eyes">
+                                <div class="character-eye">
+                                    <div class="character-iris"></div>
+                                    <div class="character-eyelid"></div>
+                                </div>
+                                <div class="character-eye">
+                                    <div class="character-iris"></div>
+                                    <div class="character-eyelid"></div>
+                                </div>
+                            </div>
+                            <div class="character-mouth"></div>
+                        </div>
+                        <div class="character-hair" id="mainCharacterHair"></div>
+                    </div>
+                    
+                    <!-- Interaction Prompt -->
+                    <div class="interaction-prompt" id="interactionPrompt">Press E to interact</div>
+                    
+                    <!-- Roads -->
+                    <div class="road road-horizontal" style="top: 35%; left: 0; width: 100%;">
+                        <!-- Road lines -->
+                        <div class="road-line road-line-horizontal" style="left: 10%;"></div>
+                        <div class="road-line road-line-horizontal" style="left: 20%;"></div>
+                        <div class="road-line road-line-horizontal" style="left: 30%;"></div>
+                        <div class="road-line road-line-horizontal" style="left: 40%;"></div>
+                        <div class="road-line road-line-horizontal" style="left: 50%;"></div>
+                        <div class="road-line road-line-horizontal" style="left: 60%;"></div>
+                        <div class="road-line road-line-horizontal" style="left: 70%;"></div>
+                        <div class="road-line road-line-horizontal" style="left: 80%;"></div>
+                        <div class="road-line road-line-horizontal" style="left: 90%;"></div>
+                    </div>
+                    <div class="road road-horizontal" style="top: 65%; left: 0; width: 100%;">
+                        <!-- Road lines -->
+                        <div class="road-line road-line-horizontal" style="left: 10%;"></div>
+                        <div class="road-line road-line-horizontal" style="left: 20%;"></div>
+                        <div class="road-line road-line-horizontal" style="left: 30%;"></div>
+                        <div class="road-line road-line-horizontal" style="left: 40%;"></div>
+                        <div class="road-line road-line-horizontal" style="left: 50%;"></div>
+                        <div class="road-line road-line-horizontal" style="left: 60%;"></div>
+                        <div class="road-line road-line-horizontal" style="left: 70%;"></div>
+                        <div class="road-line road-line-horizontal" style="left: 80%;"></div>
+                        <div class="road-line road-line-horizontal" style="left: 90%;"></div>
+                    </div>
+                    <div class="road road-vertical" style="top: 0; left: 35%; height: 100%;">
+                        <!-- Road lines -->
+                        <div class="road-line road-line-vertical" style="top: 10%;"></div>
+                        <div class="road-line road-line-vertical" style="top: 20%;"></div>
+                        <div class="road-line road-line-vertical" style="top: 30%;"></div>
+                        <div class="road-line road-line-vertical" style="top: 40%;"></div>
+                        <div class="road-line road-line-vertical" style="top: 50%;"></div>
+                        <div class="road-line road-line-vertical" style="top: 60%;"></div>
+                        <div class="road-line road-line-vertical" style="top: 70%;"></div>
+                        <div class="road-line road-line-vertical" style="top: 80%;"></div>
+                        <div class="road-line road-line-vertical" style="top: 90%;"></div>
+                    </div>
+                    <div class="road road-vertical" style="top: 0; left: 65%; height: 100%;">
+                        <!-- Road lines -->
+                        <div class="road-line road-line-vertical" style="top: 10%;"></div>
+                        <div class="road-line road-line-vertical" style="top: 20%;"></div>
+                        <div class="road-line road-line-vertical" style="top: 30%;"></div>
+                        <div class="road-line road-line-vertical" style="top: 40%;"></div>
+                        <div class="road-line road-line-vertical" style="top: 50%;"></div>
+                        <div class="road-line road-line-vertical" style="top: 60%;"></div>
+                        <div class="road-line road-line-vertical" style="top: 70%;"></div>
+                        <div class="road-line road-line-vertical" style="top: 80%;"></div>
+                        <div class="road-line road-line-vertical" style="top: 90%;"></div>
+                    </div>
+                    
+                    <!-- Crossroads -->
+                    <div class="crossroad" style="top: 35%; left: 35%;"></div>
+                    <div class="crossroad" style="top: 35%; left: 65%;"></div>
+                    <div class="crossroad" style="top: 65%; left: 35%;"></div>
+                    <div class="crossroad" style="top: 65%; left: 65%;"></div>
+                    
+                    <!-- River -->
+                    <div class="river" style="top: 20%; left: 0; width: 100%; height: 5%;"></div>
+                    
+                    <!-- 3D Trees -->
+                    <div class="tree" style="top: 10%; left: 10%;">
+                        <div class="tree-trunk"></div>
+                        <div class="tree-leaves"></div>
+                    </div>
+                    <div class="tree" style="top: 15%; left: 25%;">
+                        <div class="tree-trunk"></div>
+                        <div class="tree-leaves"></div>
+                    </div>
+                    <div class="tree" style="top: 25%; left: 40%;">
+                        <div class="tree-trunk"></div>
+                        <div class="tree-leaves"></div>
+                    </div>
+                    <div class="tree" style="top: 18%; left: 60%;">
+                        <div class="tree-trunk"></div>
+                        <div class="tree-leaves"></div>
+                    </div>
+                    <div class="tree" style="top: 22%; left: 75%;">
+                        <div class="tree-trunk"></div>
+                        <div class="tree-leaves"></div>
+                    </div>
+                    <div class="tree" style="top: 15%; left: 90%;">
+                        <div class="tree-trunk"></div>
+                        <div class="tree-leaves"></div>
+                    </div>
+                    <div class="tree" style="top: 45%; left: 5%;">
+                        <div class="tree-trunk"></div>
+                        <div class="tree-leaves"></div>
+                    </div>
+                    <div class="tree" style="top: 50%; left: 15%;">
+                        <div class="tree-trunk"></div>
+                        <div class="tree-leaves"></div>
+                    </div>
+                    <div class="tree" style="top: 55%; left: 30%;">
+                        <div class="tree-trunk"></div>
+                        <div class="tree-leaves"></div>
+                    </div>
+                    <div class="tree" style="top: 60%; left: 45%;">
+                        <div class="tree-trunk"></div>
+                        <div class="tree-leaves"></div>
+                    </div>
+                    <div class="tree" style="top: 65%; left: 60%;">
+                        <div class="tree-trunk"></div>
+                        <div class="tree-leaves"></div>
+                    </div>
+                    <div class="tree" style="top: 70%; left: 75%;">
+                        <div class="tree-trunk"></div>
+                        <div class="tree-leaves"></div>
+                    </div>
+                    <div class="tree" style="top: 75%; left: 85%;">
+                        <div class="tree-trunk"></div>
+                        <div class="tree-leaves"></div>
+                    </div>
+                    <div class="tree" style="top: 80%; left: 20%;">
+                        <div class="tree-trunk"></div>
+                        <div class="tree-leaves"></div>
+                    </div>
+                    <div class="tree" style="top: 85%; left: 40%;">
+                        <div class="tree-trunk"></div>
+                        <div class="tree-leaves"></div>
+                    </div>
+                    <div class="tree" style="top: 90%; left: 70%;">
+                        <div class="tree-trunk"></div>
+                        <div class="tree-leaves"></div>
+                    </div>
+                    
+                    <!-- Bushes -->
+                    <div class="bush" style="top: 12%; left: 18%;"></div>
+                    <div class="bush" style="top: 28%; left: 35%;"></div>
+                    <div class="bush" style="top: 48%; left: 25%;"></div>
+                    <div class="bush" style="top: 68%; left: 55%;"></div>
+                    <div class="bush" style="top: 78%; left: 15%;"></div>
+                    <div class="bush" style="top: 88%; left: 45%;"></div>
+                    
+                    <!-- Grass -->
+                    <div class="grass" style="top: 8%; left: 15%;"></div>
+                    <div class="grass" style="top: 13%; left: 32%;"></div>
+                    <div class="grass" style="top: 18%; left: 48%;"></div>
+                    <div class="grass" style="top: 23%; left: 65%;"></div>
+                    <div class="grass" style="top: 28%; left: 82%;"></div>
+                    <div class="grass" style="top: 38%; left: 12%;"></div>
+                    <div class="grass" style="top: 43%; left: 28%;"></div>
+                    <div class="grass" style="top: 48%; left: 42%;"></div>
+                    <div class="grass" style="top: 53%; left: 58%;"></div>
+                    <div class="grass" style="top: 58%; left: 72%;"></div>
+                    <div class="grass" style="top: 63%; left: 88%;"></div>
+                    <div class="grass" style="top: 73%; left: 8%;"></div>
+                    <div class="grass" style="top: 78%; left: 22%;"></div>
+                    <div class="grass" style="top: 83%; left: 38%;"></div>
+                    <div class="grass" style="top: 88%; left: 52%;"></div>
+                    <div class="grass" style="top: 93%; left: 68%;"></div>
+                    
+                    <!-- Wildlife -->
+                    <div class="wildlife bird" style="top: 5%; left: 30%;"></div>
+                    <div class="wildlife bird" style="top: 8%; left: 70%;"></div>
+                    <div class="wildlife squirrel" style="top: 50%; left: 20%;"></div>
+                    <div class="wildlife squirrel" style="top: 75%; left: 50%;"></div>
+                    
+                    <!-- Buildings -->
+                    <div class="building building-saloon" data-building="saloon" style="top: 15%; left: 15%;">
+                        <div class="building-base"></div>
+                        <div class="building-side"></div>
+                        <div class="building-name">Golden Saloon</div>
+                    </div>
+                    
+                    <div class="building building-arena" data-building="arena" style="top: 10%; left: 55%;">
+                        <div class="building-base"></div>
+                        <div class="building-side"></div>
+                        <div class="building-name">Horseshoe Arena</div>
+                    </div>
+                    
+                    <div class="building building-poker" data-building="poker" style="top: 50%; left: 25%;">
+                        <div class="building-base"></div>
+                        <div class="building-side"></div>
+                        <div class="building-name">Poker Shack</div>
+                    </div>
+                    
+                    <div class="building building-shop" data-building="shop" style="top: 60%; left: 70%;">
+                        <div class="building-base"></div>
+                        <div class="building-side"></div>
+                        <div class="building-name">General Store</div>
+                    </div>
+                    
+                    <div class="building building-bank" data-building="bank" style="top: 40%; left: 80%;">
+                        <div class="building-base"></div>
+                        <div class="building-side"></div>
+                        <div class="building-name">Bank</div>
+                    </div>
+                    
+                    <!-- Vehicles will be added dynamically -->
+                </div>
+            </div>
+            
+            <!-- Cloud Transition -->
+            <div class="cloud-transition" id="cloudTransition">
+                <div class="cloud-left"></div>
+                <div class="cloud-right"></div>
+            </div>
+            
+            <!-- Minimap -->
+            <div class="minimap" id="minimap">
+                <div class="minimap-content">
+                    <div class="minimap-player" id="minimapPlayer"></div>
+                </div>
+            </div>
+            
+            <!-- Hamburger Menu -->
+            <div class="hamburger-menu" id="hamburgerMenu">
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+            </div>
+            
+            <div class="menu-panel" id="menuPanel">
+                <div class="menu-item">
+                    <div class="menu-icon" style="background-image: url('https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
+                    <div>Level: <span id="menuLevel">57</span></div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-icon" style="background-image: url('https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
+                    <div>Gold: <span id="menuGold">14,795,215</span></div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-icon" style="background-image: url('https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
+                    <div>Gems: <span id="menuGems">684</span></div>
+                </div>
+                <div class="menu-item" id="backButton">
+                    <div class="menu-icon" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
+                    <div>Back to Map</div>
+                </div>
+                <div class="menu-item" id="mainMenuButton">
+                    <div class="menu-icon" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
+                    <div>Main Menu</div>
+                </div>
+            </div>
+            
+            <!-- Help Button -->
+            <div class="help-button" id="helpButton">?</div>
+        </div>
+        
+        <!-- Game Modal -->
+        <div class="game-modal" id="gameModal">
+            <div class="game-content">
+                <div class="game-header">
+                    <div class="game-title" id="gameTitle">Poker Game</div>
+                    <div class="game-stats">
+                        <div class="game-stat">
+                            <div class="game-icon" style="background-image: url('https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
+                            <div>Gold: <span id="gameGold">1000</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-area" id="gameArea">
+                    <!-- Game content will be populated here -->
+                </div>
+                <div class="action-buttons">
+                    <button class="action-button" id="gameAction1">Action 1</button>
+                    <button class="action-button" id="gameAction2">Action 2</button>
+                    <button class="action-button" id="leaveGame">Leave</button>
+                </div>
+                <button class="close-modal" id="closeGameModal">X</button>
+            </div>
+        </div>
+        
+        <!-- Help Modal -->
+        <div class="help-modal" id="helpModal">
+            <div class="help-content">
+                <button class="close-modal" id="closeHelpModal">X</button>
+                <h2 class="help-title">Game Rules & Guide</h2>
+                
+                <div class="help-section">
+                    <h3 class="help-section-title">Getting Started</h3>
+                    <p class="help-text">
+                        Welcome to Western Frontier! Start by selecting a city from the world map. 
+                        Each city has different buildings and activities. You begin at level 57 in Desert Mirage City.
+                    </p>
+                </div>
+                
+                <div class="help-section">
+                    <h3 class="help-section-title">Movement</h3>
+                    <p class="help-text">
+                        Use WASD or Arrow Keys to move your character around the city. 
+                        The camera will follow your character as you explore.
+                    </p>
+                </div>
+                
+                <div class="help-section">
+                    <h3 class="help-section-title">Interactions</h3>
+                    <p class="help-text">
+                        When you approach a building, an interaction prompt will appear. 
+                        Press E to enter the building and play games or access services.
+                    </p>
+                </div>
+                
+                <div class="help-section">
+                    <h3 class="help-section-title">Buildings</h3>
+                    <p class="help-text">
+                        • <strong>Golden Saloon:</strong> Play poker and other card games<br>
+                        • <strong>Horseshoe Arena:</strong> Participate in tournaments and battles<br>
+                        • <strong>Poker Shack:</strong> High-stakes poker games<br>
+                        • <strong>General Store:</strong> Buy supplies and equipment<br>
+                        • <strong>Bank:</strong> Deposit and withdraw your gold
+                    </p>
+                </div>
+                
+                <div class="help-section">
+                    <h3 class="help-section-title">Leveling Up</h3>
+                    <p class="help-text">
+                        As you play games and complete activities, you'll gain experience and level up. 
+                        Higher levels unlock new cities with more challenges and rewards.
+                    </p>
+                </div>
+                
+                <div class="help-section">
+                    <h3 class="help-section-title">Currency</h3>
+                    <p class="help-text">
+                        • <strong>Gold:</strong> The main currency used for transactions<br>
+                        • <strong>Gems:</strong> Premium currency for special items and services
+                    </p>
+                </div>
+                
+                <div class="help-section">
+                    <h3 class="help-section-title">Map Navigation</h3>
+                    <p class="help-text">
+                        The minimap in the bottom left shows your current position in the city. 
+                        Use the hamburger menu in the top right to view your stats and navigate back to the map.
+                    </p>
+                </div>
+                
+                <div class="help-section">
+                    <h3 class="help-section-title">NPC Interactions</h3>
+                    <p class="help-text">
+                        Click on NPCs to talk with them. They may provide useful information, quests, or special items.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Dialogue Modal -->
+        <div class="dialogue-modal" id="dialogueModal">
+            <div class="dialogue-content">
+                <button class="close-modal" id="closeDialogueModal">X</button>
+                <div class="dialogue-header">
+                    <div class="dialogue-avatar" id="dialogueAvatar"></div>
+                    <div class="dialogue-name" id="dialogueName">NPC Name</div>
+                </div>
+                <div class="dialogue-text" id="dialogueText">
+                    Dialogue text will appear here.
+                </div>
+                <div class="dialogue-options" id="dialogueOptions">
+                    <!-- Dialogue options will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
