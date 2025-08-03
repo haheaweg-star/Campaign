@@ -10,9 +10,11 @@ const gameState = {
     npcs: [],
     vehicles: [],
     isMoving: false,
-    lastDirection: 'right'
+    lastDirection: 'right',
+    blimpPosition: { x: 10, y: 10 },
+    blimpTarget: null,
+    blimpMoving: false
 };
-
 // City data
 const cityData = {
     1: {
@@ -56,161 +58,103 @@ const cityData = {
         level: 1000
     }
 };
-
 // Building data
 const buildingData = {
-    saloon: {
-        name: "Golden Saloon",
-        type: "saloon",
-        game: "poker",
-        info: "Cashgame $2K - $10K"
-    },
-    arena: {
-        name: "Horseshoe Arena",
-        type: "arena",
-        game: "arena",
-        info: "Tournaments Daily"
-    },
-    poker: {
-        name: "Poker Shack",
-        type: "poker",
-        game: "poker",
-        info: "High Stakes Games"
+    house: {
+        name: "Farmhouse",
+        type: "house",
+        game: "house",
+        info: "Your home"
     },
     shop: {
-        name: "General Store",
+        name: "Pierre's Shop",
         type: "shop",
         game: "shop",
-        info: "Supplies & Gear"
+        info: "Buy seeds and supplies"
     },
-    bank: {
-        name: "Bank",
-        type: "bank",
-        game: "bank",
-        info: "Deposit & Withdraw"
+    saloon: {
+        name: "Stardrop Saloon",
+        type: "saloon",
+        game: "saloon",
+        info: "Eat and socialize"
+    },
+    blacksmith: {
+        name: "Blacksmith",
+        type: "blacksmith",
+        game: "blacksmith",
+        info: "Upgrade tools"
+    },
+    library: {
+        name: "Library",
+        type: "library",
+        game: "library",
+        info: "Learn new skills"
     }
 };
-
 // Game data
 const gameData = {
-    poker: {
-        title: "Texas Hold'em Poker",
+    house: {
+        title: "Farmhouse",
         init: function() {
             const gameArea = document.getElementById('gameArea');
             gameArea.innerHTML = `
                 <div style="text-align: center;">
-                    <h3 style="color: #d4af37; margin-bottom: 20px;">Welcome to Texas Hold'em Poker</h3>
-                    <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
-                        <div style="text-align: center;">
-                            <div style="font-size: 24px; margin-bottom: 10px;">🃏</div>
-                            <div>Your Hand</div>
-                            <div style="display: flex; gap: 5px; justify-content: center; margin-top: 10px;">
-                                <div style="width: 40px; height: 60px; background: white; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 20px;">7♠</div>
-                                <div style="width: 40px; height: 60px; background: white; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 20px;">2♥</div>
-                            </div>
+                    <h3 style="color: #d4af37; margin-bottom: 20px;">Welcome to your Farmhouse</h3>
+                    <div style="background: rgba(50, 40, 30, 0.7); border-radius: 10px; padding: 20px; max-width: 400px; margin: 0 auto;">
+                        <div style="margin-bottom: 15px;">
+                            <div style="font-size: 18px; margin-bottom: 10px;">What would you like to do?</div>
                         </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 24px; margin-bottom: 10px;">🎯</div>
-                            <div>Community Cards</div>
-                            <div style="display: flex; gap: 5px; justify-content: center; margin-top: 10px;">
-                                <div style="width: 40px; height: 60px; background: white; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 20px;">A♠</div>
-                                <div style="width: 40px; height: 60px; background: white; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 20px;">K♥</div>
-                                <div style="width: 40px; height: 60px; background: white; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 20px;">Q♦</div>
-                                <div style="width: 40px; height: 60px; background: white; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 20px;">J♣</div>
-                                <div style="width: 40px; height: 60px; background: white; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 20px;">10♠</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="background: rgba(50, 40, 30, 0.7); border-radius: 10px; padding: 15px; max-width: 400px; margin: 0 auto;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                            <div>Pot: <span style="color: #d4af37; font-weight: bold;">$5,000</span></div>
-                            <div>Your Bet: <span style="color: #d4af37; font-weight: bold;">$1,000</span></div>
-                        </div>
-                        <div style="text-align: center; margin-top: 15px;">
-                            <div style="font-size: 18px; margin-bottom: 10px;">What's your move?</div>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <button class="action-button" style="width: 100%;">Sleep (Restore Energy)</button>
+                            <button class="action-button" style="width: 100%;">Cook a Meal</button>
+                            <button class="action-button" style="width: 100%;">Decorate</button>
                         </div>
                     </div>
                 </div>
             `;
             
-            document.getElementById('gameAction1').textContent = 'Check';
-            document.getElementById('gameAction2').textContent = 'Raise';
-            document.getElementById('gameGold').textContent = '1000';
-        }
-    },
-    arena: {
-        title: "Arena Battle",
-        init: function() {
-            const gameArea = document.getElementById('gameArea');
-            gameArea.innerHTML = `
-                <div style="text-align: center;">
-                    <h3 style="color: #d4af37; margin-bottom: 20px;">Select Your Opponent</h3>
-                    <div style="display: flex; justify-content: center; gap: 20px;">
-                        <div style="text-align: center;">
-                            <div style="width: 80px; height: 80px; background: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover; border-radius: 50%; margin: 0 auto 10px;"></div>
-                            <div>Bandit Bill</div>
-                            <div style="color: #d4af37; font-weight: bold;">Easy</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="width: 80px; height: 80px; background: url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover; border-radius: 50%; margin: 0 auto 10px;"></div>
-                            <div>Sally Saloon</div>
-                            <div style="color: #d4af37; font-weight: bold;">Medium</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="width: 80px; height: 80px; background: url('https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover; border-radius: 50%; margin: 0 auto 10px;"></div>
-                            <div>Cowboy Carl</div>
-                            <div style="color: #d4af37; font-weight: bold;">Hard</div>
-                        </div>
-                    </div>
-                    <div style="background: rgba(50, 40, 30, 0.7); border-radius: 10px; padding: 15px; max-width: 400px; margin: 20px auto 0;">
-                        <div style="text-align: center; margin-bottom: 10px;">Entry Fee: <span style="color: #d4af37; font-weight: bold;">500 Gold</span></div>
-                        <div style="text-align: center;">Prize Pool: <span style="color: #d4af37; font-weight: bold;">1,500 Gold</span></div>
-                    </div>
-                </div>
-            `;
-            
-            document.getElementById('gameAction1').textContent = 'Easy';
-            document.getElementById('gameAction2').textContent = 'Hard';
-            document.getElementById('gameGold').textContent = '500';
+            document.getElementById('gameAction1').textContent = 'Sleep';
+            document.getElementById('gameAction2').textContent = 'Cook';
+            document.getElementById('gameGold').textContent = gameState.playerGold.toLocaleString();
         }
     },
     shop: {
-        title: "General Store",
+        title: "Pierre's Shop",
         init: function() {
             const gameArea = document.getElementById('gameArea');
             gameArea.innerHTML = `
                 <div style="text-align: center;">
-                    <h3 style="color: #d4af37; margin-bottom: 20px;">Welcome to the General Store</h3>
+                    <h3 style="color: #d4af37; margin-bottom: 20px;">Welcome to Pierre's Shop</h3>
                     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; max-width: 500px; margin: 0 auto;">
                         <div style="background: rgba(50, 40, 30, 0.7); border: 2px solid #8b6914; border-radius: 10px; padding: 10px;">
-                            <div style="font-size: 30px; margin-bottom: 5px;">🥾</div>
-                            <div>Boots</div>
+                            <div style="font-size: 30px; margin-bottom: 5px;">🌱</div>
+                            <div>Parsnip Seeds</div>
+                            <div style="color: #d4af37; font-weight: bold;">20 Gold</div>
+                        </div>
+                        <div style="background: rgba(50, 40, 30, 0.7); border: 2px solid #8b6914; border-radius: 10px; padding: 10px;">
+                            <div style="font-size: 30px; margin-bottom: 5px;">🥕</div>
+                            <div>Carrot Seeds</div>
+                            <div style="color: #d4af37; font-weight: bold;">30 Gold</div>
+                        </div>
+                        <div style="background: rgba(50, 40, 30, 0.7); border: 2px solid #8b6914; border-radius: 10px; padding: 10px;">
+                            <div style="font-size: 30px; margin-bottom: 5px;">🥔</div>
+                            <div>Potato Seeds</div>
+                            <div style="color: #d4af37; font-weight: bold;">40 Gold</div>
+                        </div>
+                        <div style="background: rgba(50, 40, 30, 0.7); border: 2px solid #8b6914; border-radius: 10px; padding: 10px;">
+                            <div style="font-size: 30px; margin-bottom: 5px;">🍅</div>
+                            <div>Tomato Seeds</div>
                             <div style="color: #d4af37; font-weight: bold;">50 Gold</div>
                         </div>
                         <div style="background: rgba(50, 40, 30, 0.7); border: 2px solid #8b6914; border-radius: 10px; padding: 10px;">
-                            <div style="font-size: 30px; margin-bottom: 5px;">🤠</div>
-                            <div>Hat</div>
-                            <div style="color: #d4af37; font-weight: bold;">75 Gold</div>
+                            <div style="font-size: 30px; margin-bottom: 5px;">🌽</div>
+                            <div>Corn Seeds</div>
+                            <div style="color: #d4af37; font-weight: bold;">60 Gold</div>
                         </div>
                         <div style="background: rgba(50, 40, 30, 0.7); border: 2px solid #8b6914; border-radius: 10px; padding: 10px;">
-                            <div style="font-size: 30px; margin-bottom: 5px;">🔫</div>
-                            <div>Revolver</div>
-                            <div style="color: #d4af37; font-weight: bold;">200 Gold</div>
-                        </div>
-                        <div style="background: rgba(50, 40, 30, 0.7); border: 2px solid #8b6914; border-radius: 10px; padding: 10px;">
-                            <div style="font-size: 30px; margin-bottom: 5px;">🍺</div>
-                            <div>Whiskey</div>
-                            <div style="color: #d4af37; font-weight: bold;">10 Gold</div>
-                        </div>
-                        <div style="background: rgba(50, 40, 30, 0.7); border: 2px solid #8b6914; border-radius: 10px; padding: 10px;">
-                            <div style="font-size: 30px; margin-bottom: 5px;">🍖</div>
-                            <div>Steak</div>
-                            <div style="color: #d4af37; font-weight: bold;">15 Gold</div>
-                        </div>
-                        <div style="background: rgba(50, 40, 30, 0.7); border: 2px solid #8b6914; border-radius: 10px; padding: 10px;">
-                            <div style="font-size: 30px; margin-bottom: 5px;">💎</div>
-                            <div>Gem</div>
-                            <div style="color: #d4af37; font-weight: bold;">500 Gold</div>
+                            <div style="font-size: 30px; margin-bottom: 5px;">🥬</div>
+                            <div>Kale Seeds</div>
+                            <div style="color: #d4af37; font-weight: bold;">70 Gold</div>
                         </div>
                     </div>
                 </div>
@@ -221,127 +165,203 @@ const gameData = {
             document.getElementById('gameGold').textContent = gameState.playerGold.toLocaleString();
         }
     },
-    bank: {
-        title: "Bank",
+    saloon: {
+        title: "Stardrop Saloon",
         init: function() {
             const gameArea = document.getElementById('gameArea');
             gameArea.innerHTML = `
                 <div style="text-align: center;">
-                    <h3 style="color: #d4af37; margin-bottom: 20px;">Welcome to the Bank</h3>
-                    <div style="background: rgba(50, 40, 30, 0.7); border: 2px solid #8b6914; border-radius: 10px; padding: 20px; max-width: 400px; margin: 0 auto;">
+                    <h3 style="color: #d4af37; margin-bottom: 20px;">Welcome to the Stardrop Saloon</h3>
+                    <div style="background: rgba(50, 40, 30, 0.7); border-radius: 10px; padding: 20px; max-width: 400px; margin: 0 auto;">
                         <div style="margin-bottom: 15px;">
-                            <div style="font-size: 14px; color: #f0e6d2;">Current Balance</div>
-                            <div style="font-size: 24px; color: #d4af37; font-weight: bold;">${gameState.playerGold.toLocaleString()} Gold</div>
+                            <div style="font-size: 18px; margin-bottom: 10px;">What can I get for you?</div>
                         </div>
-                        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                            <input type="number" id="depositAmount" placeholder="Amount" style="flex: 1; padding: 8px; background: rgba(20, 15, 10, 0.8); border: 1px solid #8b6914; border-radius: 5px; color: #f0e6d2;">
-                            <button class="action-button" style="padding: 8px 15px;">Deposit</button>
-                        </div>
-                        <div style="display: flex; gap: 10px;">
-                            <input type="number" id="withdrawAmount" placeholder="Amount" style="flex: 1; padding: 8px; background: rgba(20, 15, 10, 0.8); border: 1px solid #8b6914; border-radius: 5px; color: #f0e6d2;">
-                            <button class="action-button" style="padding: 8px 15px;">Withdraw</button>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <div>Beer</div>
+                                <div style="color: #d4af37; font-weight: bold;">50 Gold</div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <div>Wine</div>
+                                <div style="color: #d4af37; font-weight: bold;">100 Gold</div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <div>Salad</div>
+                                <div style="color: #d4af37; font-weight: bold;">120 Gold</div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <div>Pizza</div>
+                                <div style="color: #d4af37; font-weight: bold;">200 Gold</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             `;
             
-            document.getElementById('gameAction1').textContent = 'Deposit';
-            document.getElementById('gameAction2').textContent = 'Withdraw';
+            document.getElementById('gameAction1').textContent = 'Buy Food';
+            document.getElementById('gameAction2').textContent = 'Buy Drink';
+            document.getElementById('gameGold').textContent = gameState.playerGold.toLocaleString();
+        }
+    },
+    blacksmith: {
+        title: "Blacksmith",
+        init: function() {
+            const gameArea = document.getElementById('gameArea');
+            gameArea.innerHTML = `
+                <div style="text-align: center;">
+                    <h3 style="color: #d4af37; margin-bottom: 20px;">Welcome to the Blacksmith</h3>
+                    <div style="background: rgba(50, 40, 30, 0.7); border-radius: 10px; padding: 20px; max-width: 400px; margin: 0 auto;">
+                        <div style="margin-bottom: 15px;">
+                            <div style="font-size: 18px; margin-bottom: 10px;">Upgrade your tools</div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <div>Hoe Upgrade</div>
+                                <div style="color: #d4af37; font-weight: bold;">500 Gold</div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <div>Watering Can Upgrade</div>
+                                <div style="color: #d4af37; font-weight: bold;">500 Gold</div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <div>Pickaxe Upgrade</div>
+                                <div style="color: #d4af37; font-weight: bold;">500 Gold</div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <div>Axe Upgrade</div>
+                                <div style="color: #d4af37; font-weight: bold;">500 Gold</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('gameAction1').textContent = 'Upgrade';
+            document.getElementById('gameAction2').textContent = 'Repair';
+            document.getElementById('gameGold').textContent = gameState.playerGold.toLocaleString();
+        }
+    },
+    library: {
+        title: "Library",
+        init: function() {
+            const gameArea = document.getElementById('gameArea');
+            gameArea.innerHTML = `
+                <div style="text-align: center;">
+                    <h3 style="color: #d4af37; margin-bottom: 20px;">Welcome to the Library</h3>
+                    <div style="background: rgba(50, 40, 30, 0.7); border-radius: 10px; padding: 20px; max-width: 400px; margin: 0 auto;">
+                        <div style="margin-bottom: 15px;">
+                            <div style="font-size: 18px; margin-bottom: 10px;">Learn new skills</div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <div>Farming Guide</div>
+                                <div style="color: #d4af37; font-weight: bold;">100 Gold</div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <div>Fishing Guide</div>
+                                <div style="color: #d4af37; font-weight: bold;">100 Gold</div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <div>Mining Guide</div>
+                                <div style="color: #d4af37; font-weight: bold;">100 Gold</div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <div>Combat Guide</div>
+                                <div style="color: #d4af37; font-weight: bold;">100 Gold</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('gameAction1').textContent = 'Study';
+            document.getElementById('gameAction2').textContent = 'Research';
             document.getElementById('gameGold').textContent = gameState.playerGold.toLocaleString();
         }
     }
 };
-
 // NPC dialogue data
 const npcDialogues = [
     {
-        name: "Billy the Kid",
+        name: "Pierre",
         dialogues: [
             {
-                text: "Howdy partner! Welcome to Desert Mirage City.",
+                text: "Welcome to my shop! I have the best seeds in town.",
                 options: [
-                    { text: "Nice to meet you!", next: 1 },
-                    { text: "Do you know where the saloon is?", next: 2 }
+                    { text: "I'm looking for seeds.", next: 1 },
+                    { text: "Just browsing.", next: 2 }
                 ]
             },
             {
-                text: "The pleasure's all mine! If you're looking for adventure, you've come to the right place.",
+                text: "Great! I have parsnip, carrot, and potato seeds available today.",
                 options: [
-                    { text: "What kind of adventures?", next: 3 },
-                    { text: "I'll be on my way.", next: -1 }
+                    { text: "I'll take some parsnip seeds.", next: -1 },
+                    { text: "I'll be back later.", next: -1 }
                 ]
             },
             {
-                text: "Sure thing! Just head north from here. You can't miss it with its big sign.",
+                text: "Feel free to look around. Let me know if you need anything!",
                 options: [
-                    { text: "Thanks for the help!", next: -1 }
-                ]
-            },
-            {
-                text: "Oh, we've got all sorts! Poker games, horse races, even the occasional duel if you're feeling brave.",
-                options: [
-                    { text: "Sounds exciting!", next: -1 }
+                    { text: "Thanks, I will.", next: -1 }
                 ]
             }
         ]
     },
     {
-        name: "Sally Saloon",
+        name: "Gus",
         dialogues: [
             {
-                text: "Well hello there, handsome! Looking for a good time?",
+                text: "Welcome to the Stardrop Saloon! What can I get for you?",
                 options: [
-                    { text: "Just passing through.", next: 1 },
-                    { text: "What do you recommend?", next: 2 }
+                    { text: "I'll have a beer.", next: 1 },
+                    { text: "Do you have any food?", next: 2 }
                 ]
             },
             {
-                text: "A shame! We've got the best whiskey this side of the Mississippi.",
+                text: "Coming right up! Here's your cold beer.",
                 options: [
-                    { text: "Maybe I'll try some next time.", next: -1 }
+                    { text: "Thanks!", next: -1 }
                 ]
             },
             {
-                text: "Our poker tables are always popular, or if you're feeling lucky, try your hand at the slot machines.",
+                text: "We have pizza, salad, and other dishes. What would you like?",
                 options: [
-                    { text: "I'll give it a shot!", next: -1 }
+                    { text: "I'll have the pizza.", next: -1 }
                 ]
             }
         ]
     },
     {
-        name: "Grizzly Gus",
+        name: "Clint",
         dialogues: [
             {
-                text: "Grrr... You new in town?",
+                text: "I'm the blacksmith. Need something upgraded?",
                 options: [
-                    { text: "Yes, just arrived.", next: 1 },
-                    { text: "What's it to you?", next: 2 }
+                    { text: "Yes, I want to upgrade my tools.", next: 1 },
+                    { text: "Just looking around.", next: 2 }
                 ]
             },
             {
-                text: "Well, watch your step. This town ain't for the faint of heart.",
+                text: "I can upgrade your tools for a price. What do you need upgraded?",
                 options: [
-                    { text: "I can handle myself.", next: -1 }
+                    { text: "I'll come back when I have the money.", next: -1 }
                 ]
             },
             {
-                text: "Just keep out of trouble and we'll get along fine.",
+                text: "Let me know if you need anything. I'm always here.",
                 options: [
-                    { text: "Fair enough.", next: -1 }
+                    { text: "Thanks, I will.", next: -1 }
                 ]
             }
         ]
     }
 ];
-
 // DOM elements
 const worldMapContainer = document.getElementById('worldMapContainer');
 const citySceneContainer = document.getElementById('citySceneContainer');
 const cityScene = document.getElementById('cityScene');
 const mainCharacter = document.getElementById('mainCharacter');
 const mainCharacterHair = document.getElementById('mainCharacterHair');
-const fogOfWar = document.getElementById('fogOfWar');
 const interactionPrompt = document.getElementById('interactionPrompt');
 const cloudTransition = document.getElementById('cloudTransition');
 const minimap = document.getElementById('minimap');
@@ -367,7 +387,7 @@ const leaveGame = document.getElementById('leaveGame');
 const menuLevel = document.getElementById('menuLevel');
 const menuGold = document.getElementById('menuGold');
 const menuGems = document.getElementById('menuGems');
-
+const blimp = document.getElementById('blimp');
 // Movement keys state
 const keys = {
     w: false,
@@ -379,15 +399,29 @@ const keys = {
     ArrowDown: false,
     ArrowRight: false
 };
-
 // Initialize game
 function initGame() {
     // Update menu
     updateMenu();
     
+    // Update cloud covers based on player level
+    updateCloudCovers();
+    
     // Add click event to map islands
     document.querySelectorAll('.map-island').forEach(island => {
-        island.addEventListener('click', () => enterCity(island));
+        island.addEventListener('click', () => {
+            const cityId = parseInt(island.getAttribute('data-city'));
+            const cityLevel = parseInt(island.getAttribute('data-level'));
+            
+            // Check if player level is sufficient
+            if (gameState.playerLevel < cityLevel) {
+                showNotification(`You need to reach level ${cityLevel} to access this city!`);
+                return;
+            }
+            
+            // Move blimp to island
+            moveBlimpToIsland(island);
+        });
     });
     
     // Hamburger menu event
@@ -452,7 +486,41 @@ function initGame() {
         }
     });
 }
-
+// Update cloud covers based on player level
+function updateCloudCovers() {
+    document.querySelectorAll('.map-island').forEach(island => {
+        const cityLevel = parseInt(island.getAttribute('data-level'));
+        const cloudCover = island.querySelector('.island-cloud-cover');
+        
+        if (gameState.playerLevel < cityLevel) {
+            cloudCover.style.display = 'block';
+        } else {
+            cloudCover.style.display = 'none';
+        }
+    });
+}
+// Move blimp to island
+function moveBlimpToIsland(island) {
+    if (gameState.blimpMoving) return;
+    
+    gameState.blimpMoving = true;
+    gameState.blimpTarget = island;
+    
+    const islandRect = island.getBoundingClientRect();
+    const mapRect = document.querySelector('.poptropica-map').getBoundingClientRect();
+    
+    const targetX = ((islandRect.left + islandRect.width / 2 - mapRect.left) / mapRect.width) * 100;
+    const targetY = ((islandRect.top + islandRect.height / 2 - mapRect.top - 30) / mapRect.height) * 100;
+    
+    blimp.style.left = `${targetX}%`;
+    blimp.style.top = `${targetY}%`;
+    
+    // After blimp reaches island, enter city
+    setTimeout(() => {
+        gameState.blimpMoving = false;
+        enterCity(island);
+    }, 2000);
+}
 // Enter a city
 function enterCity(island) {
     const cityId = parseInt(island.getAttribute('data-city'));
@@ -480,7 +548,6 @@ function enterCity(island) {
         initializeCity();
     }, 4000);
 }
-
 // Initialize city scene
 function initializeCity() {
     // Reset character position
@@ -493,14 +560,12 @@ function initializeCity() {
     // Show UI elements
     minimap.style.display = 'block';
     
-    // Generate NPCs and vehicles
+    // Generate NPCs
     generateNPCs();
-    generateVehicles();
     
     // Start game loop
     gameLoop();
 }
-
 // Generate NPCs
 function generateNPCs() {
     // Clear existing NPCs
@@ -514,7 +579,6 @@ function generateNPCs() {
         cityScene.appendChild(npc.element);
     }
 }
-
 // Create an NPC
 function createNPC(index) {
     const npc = document.createElement('div');
@@ -600,25 +664,25 @@ function createNPC(index) {
     npc.appendChild(head);
     npc.appendChild(hair);
     
-    // Random position on road
-    const roads = [
-        { top: '35%', left: '0%', width: '100%', height: '60px', horizontal: true },
-        { top: '65%', left: '0%', width: '100%', height: '60px', horizontal: true },
-        { top: '0%', left: '35%', width: '60px', height: '100%', horizontal: false },
-        { top: '0%', left: '65%', width: '60px', height: '100%', horizontal: false }
+    // Random position on path
+    const paths = [
+        { top: '35%', left: '0%', width: '100%', height: '20px', horizontal: true },
+        { top: '65%', left: '0%', width: '100%', height: '20px', horizontal: true },
+        { top: '0%', left: '35%', width: '20px', height: '100%', horizontal: false },
+        { top: '0%', left: '65%', width: '20px', height: '100%', horizontal: false }
     ];
     
-    const road = roads[Math.floor(Math.random() * roads.length)];
+    const path = paths[Math.floor(Math.random() * paths.length)];
     
     let position;
-    if (road.horizontal) {
+    if (path.horizontal) {
         position = {
             x: Math.random() * 90 + 5,
-            y: parseFloat(road.top) + 30
+            y: parseFloat(path.top) + 10
         };
     } else {
         position = {
-            x: parseFloat(road.left) + 30,
+            x: parseFloat(path.left) + 10,
             y: Math.random() * 90 + 5
         };
     }
@@ -634,10 +698,10 @@ function createNPC(index) {
     // Random movement (slower and more predictable)
     const movement = {
         speed: Math.random() * 0.02 + 0.01, // Much slower
-        direction: road.horizontal ? (Math.random() > 0.5 ? 0 : Math.PI) : (Math.random() > 0.5 ? Math.PI/2 : -Math.PI/2),
+        direction: path.horizontal ? (Math.random() > 0.5 ? 0 : Math.PI) : (Math.random() > 0.5 ? Math.PI/2 : -Math.PI/2),
         changeDirectionTimer: 0,
         maxChangeDirectionTimer: Math.random() * 300 + 200, // Longer timer for more predictable movement
-        road: road
+        path: path
     };
     
     // Assign dialogue data
@@ -650,124 +714,17 @@ function createNPC(index) {
         dialogue: dialogueData
     };
 }
-
-// Generate vehicles
-function generateVehicles() {
-    // Clear existing vehicles
-    document.querySelectorAll('.vehicle').forEach(vehicle => vehicle.remove());
-    gameState.vehicles = [];
-    
-    // Generate 8 vehicles
-    for (let i = 0; i < 8; i++) {
-        const vehicle = createVehicle();
-        gameState.vehicles.push(vehicle);
-        cityScene.appendChild(vehicle.element);
-    }
-}
-
-// Create a vehicle
-function createVehicle() {
-    const vehicleTypes = ['car', 'truck', 'bus'];
-    const vehicleType = vehicleTypes[Math.floor(Math.random() * vehicleTypes.length)];
-    
-    const vehicle = document.createElement('div');
-    vehicle.className = `vehicle ${vehicleType}`;
-    
-    // Create wheels based on vehicle type
-    if (vehicleType === 'car') {
-        const wheelFront = document.createElement('div');
-        wheelFront.className = 'car-wheel car-wheel-front';
-        const wheelRear = document.createElement('div');
-        wheelRear.className = 'car-wheel car-wheel-rear';
-        vehicle.appendChild(wheelFront);
-        vehicle.appendChild(wheelRear);
-    } else if (vehicleType === 'truck') {
-        const wheelFront = document.createElement('div');
-        wheelFront.className = 'truck-wheel truck-wheel-front';
-        const wheelRear = document.createElement('div');
-        wheelRear.className = 'truck-wheel truck-wheel-rear';
-        vehicle.appendChild(wheelFront);
-        vehicle.appendChild(wheelRear);
-    } else if (vehicleType === 'bus') {
-        const wheelFront = document.createElement('div');
-        wheelFront.className = 'bus-wheel bus-wheel-front';
-        const wheelMiddle = document.createElement('div');
-        wheelMiddle.className = 'bus-wheel bus-wheel-middle';
-        const wheelRear = document.createElement('div');
-        wheelRear.className = 'bus-wheel bus-wheel-rear';
-        vehicle.appendChild(wheelFront);
-        vehicle.appendChild(wheelMiddle);
-        vehicle.appendChild(wheelRear);
-        
-        // Add windows to bus
-        for (let i = 1; i <= 3; i++) {
-            const window = document.createElement('div');
-            window.className = 'bus-window';
-            window.style.left = `${20 + i * 20}%`;
-            vehicle.appendChild(window);
-        }
-    }
-    
-    // Random color
-    const colors = ['#e53935', '#43a047', '#1e88e5', '#8e24aa', '#fb8c00', '#546e7a', '#ff9800'];
-    const color = colors[Math.floor(Math.random() * colors.length)];
-    vehicle.style.backgroundColor = color;
-    
-    // Random position on road
-    const roads = [
-        { top: '35%', left: '0%', width: '100%', height: '60px', horizontal: true },
-        { top: '65%', left: '0%', width: '100%', height: '60px', horizontal: true },
-        { top: '0%', left: '35%', width: '60px', height: '100%', horizontal: false },
-        { top: '0%', left: '65%', width: '60px', height: '100%', horizontal: false }
-    ];
-    
-    const road = roads[Math.floor(Math.random() * roads.length)];
-    
-    let position;
-    if (road.horizontal) {
-        position = {
-            x: Math.random() * 90 + 5,
-            y: parseFloat(road.top) + 30
-        };
-    } else {
-        position = {
-            x: parseFloat(road.left) + 30,
-            y: Math.random() * 90 + 5
-        };
-    }
-    
-    vehicle.style.left = `${position.x}%`;
-    vehicle.style.top = `${position.y}%`;
-    
-    // Random movement
-    const movement = {
-        speed: Math.random() * 0.08 + 0.05,
-        direction: road.horizontal ? (Math.random() > 0.5 ? 0 : Math.PI) : (Math.random() > 0.5 ? Math.PI/2 : -Math.PI/2),
-        road: road
-    };
-    
-    return {
-        element: vehicle,
-        position: position,
-        movement: movement,
-        type: vehicleType
-    };
-}
-
 // Game loop
 function gameLoop() {
     if (citySceneContainer.style.display === 'block') {
         moveCharacter();
         moveNPCs();
-        moveVehicles();
         checkBuildingProximity();
-        updateFogOfWar();
         updateViewport();
         updateMinimap();
     }
     requestAnimationFrame(gameLoop);
 }
-
 // Move character based on pressed keys
 function moveCharacter() {
     const speed = 0.5; // Percentage per frame
@@ -792,7 +749,6 @@ function moveCharacter() {
     // Update character position
     updateCharacterPosition();
 }
-
 // Update character position and flip direction
 function updateCharacterPosition() {
     mainCharacter.style.left = `${gameState.characterPosition.x}%`;
@@ -819,7 +775,6 @@ function updateCharacterPosition() {
         });
     }
 }
-
 // Update character animation based on movement state
 function updateCharacterAnimation() {
     if (gameState.isMoving) {
@@ -834,7 +789,6 @@ function updateCharacterAnimation() {
         mainCharacter.classList.remove('moving-left', 'moving-right');
     }
 }
-
 // Move NPCs
 function moveNPCs() {
     gameState.npcs.forEach(npc => {
@@ -843,8 +797,8 @@ function moveNPCs() {
         
         // Change direction randomly (less frequently)
         if (npc.movement.changeDirectionTimer >= npc.movement.maxChangeDirectionTimer) {
-            // Only change direction along the road
-            if (npc.movement.road.horizontal) {
+            // Only change direction along the path
+            if (npc.movement.path.horizontal) {
                 npc.movement.direction = Math.random() > 0.5 ? 0 : Math.PI;
             } else {
                 npc.movement.direction = Math.random() > 0.5 ? Math.PI/2 : -Math.PI/2;
@@ -857,23 +811,23 @@ function moveNPCs() {
         npc.position.x += Math.cos(npc.movement.direction) * npc.movement.speed;
         npc.position.y += Math.sin(npc.movement.direction) * npc.movement.speed;
         
-        // Keep NPC on road
-        if (npc.movement.road.horizontal) {
+        // Keep NPC on path
+        if (npc.movement.path.horizontal) {
             if (npc.position.x < 0) {
                 npc.position.x = 100;
             } else if (npc.position.x > 100) {
                 npc.position.x = 0;
             }
-            // Keep y position on road
-            npc.position.y = parseFloat(npc.movement.road.top) + 30;
+            // Keep y position on path
+            npc.position.y = parseFloat(npc.movement.path.top) + 10;
         } else {
             if (npc.position.y < 0) {
                 npc.position.y = 100;
             } else if (npc.position.y > 100) {
                 npc.position.y = 0;
             }
-            // Keep x position on road
-            npc.position.x = parseFloat(npc.movement.road.left) + 30;
+            // Keep x position on path
+            npc.position.x = parseFloat(npc.movement.path.left) + 10;
         }
         
         // Update NPC position
@@ -891,58 +845,6 @@ function moveNPCs() {
         npc.element.classList.add('npc', 'moving');
     });
 }
-
-// Move vehicles
-function moveVehicles() {
-    gameState.vehicles.forEach(vehicle => {
-        // Move vehicle
-        vehicle.position.x += Math.cos(vehicle.movement.direction) * vehicle.movement.speed;
-        vehicle.position.y += Math.sin(vehicle.movement.direction) * vehicle.movement.speed;
-        
-        // Keep vehicle on road
-        if (vehicle.movement.road.horizontal) {
-            if (vehicle.position.x < -10) {
-                vehicle.position.x = 110;
-            } else if (vehicle.position.x > 110) {
-                vehicle.position.x = -10;
-            }
-            // Keep y position on road
-            vehicle.position.y = parseFloat(vehicle.movement.road.top) + 30;
-        } else {
-            if (vehicle.position.y < -10) {
-                vehicle.position.y = 110;
-            } else if (vehicle.position.y > 110) {
-                vehicle.position.y = -10;
-            }
-            // Keep x position on road
-            vehicle.position.x = parseFloat(vehicle.movement.road.left) + 30;
-        }
-        
-        // Update vehicle position
-        vehicle.element.style.left = `${vehicle.position.x}%`;
-        vehicle.element.style.top = `${vehicle.position.y}%`;
-        
-        // Rotate vehicle based on direction
-        if (vehicle.movement.road.horizontal) {
-            if (Math.cos(vehicle.movement.direction) < 0) {
-                vehicle.element.style.transform = 'rotateX(60deg) rotateZ(225deg)';
-                vehicle.element.classList.add('moving-horizontal');
-            } else {
-                vehicle.element.style.transform = 'rotateX(60deg) rotateZ(45deg)';
-                vehicle.element.classList.add('moving-horizontal');
-            }
-        } else {
-            if (Math.sin(vehicle.movement.direction) < 0) {
-                vehicle.element.style.transform = 'rotateX(60deg) rotateZ(-45deg)';
-                vehicle.element.classList.add('moving-vertical');
-            } else {
-                vehicle.element.style.transform = 'rotateX(60deg) rotateZ(135deg)';
-                vehicle.element.classList.add('moving-vertical');
-            }
-        }
-    });
-}
-
 // Update viewport to follow character
 function updateViewport() {
     // Calculate viewport position based on character position
@@ -966,31 +868,14 @@ function updateViewport() {
     // Apply viewport position
     cityScene.style.transform = `translate(-${gameState.viewportPosition.x}px, -${gameState.viewportPosition.y}px)`;
 }
-
-// Update fog of war based on character position
-function updateFogOfWar() {
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-    const sceneWidth = cityScene.offsetWidth;
-    const sceneHeight = cityScene.offsetHeight;
-    
-    // Calculate character position relative to viewport
-    const characterX = ((gameState.characterPosition.x / 100) * sceneWidth - gameState.viewportPosition.x) / viewportWidth * 100;
-    const characterY = ((gameState.characterPosition.y / 100) * sceneHeight - gameState.viewportPosition.y) / viewportHeight * 100;
-    
-    fogOfWar.style.setProperty('--x', `${characterX}%`);
-    fogOfWar.style.setProperty('--y', `${characterY}%`);
-}
-
 // Update minimap
 function updateMinimap() {
     minimapPlayer.style.left = `${gameState.characterPosition.x}%`;
     minimapPlayer.style.top = `${gameState.characterPosition.y}%`;
 }
-
 // Check if character is near a building
 function checkBuildingProximity() {
-    const buildings = document.querySelectorAll('.building');
+    const buildings = document.querySelectorAll('.pixel-building');
     let closestBuilding = null;
     let closestDistance = Infinity;
     
@@ -1035,7 +920,6 @@ function checkBuildingProximity() {
         });
     }
 }
-
 // Enter a building
 function enterBuilding(buildingElement) {
     const buildingType = buildingElement.getAttribute('data-building');
@@ -1050,12 +934,10 @@ function enterBuilding(buildingElement) {
         gameData[building.game].init();
     }
 }
-
 // Close game modal
 function closeGameModalHandler() {
     gameModal.style.display = 'none';
 }
-
 // Toggle menu
 function toggleMenu() {
     if (menuPanel.style.display === 'block') {
@@ -1065,21 +947,18 @@ function toggleMenu() {
         updateMenu();
     }
 }
-
 // Update menu
 function updateMenu() {
     menuLevel.textContent = gameState.playerLevel;
     menuGold.textContent = gameState.playerGold.toLocaleString();
     menuGems.textContent = gameState.playerGems;
 }
-
 // Back to map
 function backToMap() {
     citySceneContainer.style.display = 'none';
     worldMapContainer.style.display = 'flex';
     menuPanel.style.display = 'none';
 }
-
 // Main menu
 function mainMenu() {
     // In a real game, this would navigate to the main menu
@@ -1087,7 +966,6 @@ function mainMenu() {
     // For demo purposes, we'll just go back to the map
     backToMap();
 }
-
 // Open dialogue with NPC
 function openDialogue(npcIndex) {
     const npc = gameState.npcs[npcIndex];
@@ -1103,7 +981,6 @@ function openDialogue(npcIndex) {
     // Show dialogue modal
     dialogueModal.style.display = 'flex';
 }
-
 // Show dialogue
 function showDialogue(dialogue) {
     dialogueText.textContent = dialogue.text;
@@ -1129,7 +1006,6 @@ function showDialogue(dialogue) {
         dialogueOptions.appendChild(optionElement);
     });
 }
-
 // Show notification
 function showNotification(message) {
     const notification = document.createElement('div');
@@ -1152,6 +1028,5 @@ function showNotification(message) {
         document.body.removeChild(notification);
     }, 3000);
 }
-
 // Initialize the game when page loads
 window.addEventListener('load', initGame);
