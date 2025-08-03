@@ -16,7 +16,7 @@ body {
     position: relative;
     overflow: hidden;
 }
-/* World Map Styles - Updated to match Poptropica style */
+/* World Map Styles - Updated to match Poptropica style with actual map features */
 .world-map-container {
     width: 100%;
     height: 100%;
@@ -58,11 +58,11 @@ body {
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     overflow: hidden;
+    image-rendering: pixelated; /* Pixelated rendering for retro look */
 }
-.map-island {
+/* City Styles - Actual city shapes instead of circles */
+.map-city {
     position: absolute;
-    background: #90c695;
-    border-radius: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -70,107 +70,1063 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 5;
 }
-.map-island:hover {
+.map-city:hover {
     transform: scale(1.05);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    z-index: 6;
 }
-.island-1 {
+.city-1 {
     width: 180px;
-    height: 180px;
+    height: 150px;
     top: 20%;
     left: 15%;
-    background: #f5d76e;
+    background: linear-gradient(to bottom, #f5d76e, #f1c40f); /* Desert color */
+    clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
 }
-.island-2 {
+.city-2 {
     width: 150px;
-    height: 150px;
+    height: 130px;
     top: 15%;
     left: 45%;
-    background: #76d7c4;
+    background: linear-gradient(to bottom, #76d7c4, #1abc9c); /* Tech color */
+    clip-path: polygon(0% 15%, 15% 0%, 85% 0%, 100% 15%, 100% 85%, 85% 100%, 15% 100%, 0% 85%);
 }
-.island-3 {
+.city-3 {
     width: 200px;
-    height: 200px;
+    height: 160px;
     top: 10%;
     left: 75%;
-    background: #f1948a;
+    background: linear-gradient(to bottom, #f1948a, #e74c3c); /* Carnival color */
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 }
-.island-4 {
+.city-4 {
     width: 170px;
-    height: 170px;
+    height: 180px;
     top: 50%;
     left: 10%;
-    background: #85c1e2;
+    background: linear-gradient(to bottom, #85c1e2, #3498db); /* Treehouse color */
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
 }
-.island-5 {
+.city-5 {
     width: 160px;
-    height: 160px;
+    height: 140px;
     top: 55%;
     left: 40%;
-    background: #d2b4de;
+    background: linear-gradient(to bottom, #d2b4de, #9b59b6); /* Frost color */
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
 }
-.island-6 {
+.city-6 {
     width: 190px;
-    height: 190px;
+    height: 150px;
     top: 50%;
     left: 70%;
-    background: #a9dfbf;
+    background: linear-gradient(to bottom, #a9dfbf, #2ecc71); /* Jungle color */
+    clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
 }
-.island-7 {
+.city-7 {
     width: 140px;
-    height: 140px;
+    height: 160px;
     top: 75%;
     left: 25%;
-    background: #f9e79f;
+    background: linear-gradient(to bottom, #f9e79f, #f4d03f); /* Haunted color */
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 }
-.island-8 {
+.city-8 {
     width: 150px;
-    height: 150px;
+    height: 170px;
     top: 80%;
     left: 55%;
-    background: #aed6f1;
+    background: linear-gradient(to bottom, #aed6f1, #5dade2); /* Tech capital color */
+    clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
 }
-.island-9 {
+.city-9 {
     width: 130px;
-    height: 130px;
+    height: 140px;
     top: 30%;
     left: 85%;
-    background: #f5b7b1;
+    background: linear-gradient(to bottom, #f5b7b1, #ec7063); /* Candy color */
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
 }
-.island-10 {
+.city-10 {
     width: 160px;
-    height: 160px;
+    height: 130px;
     top: 70%;
     left: 80%;
-    background: #d5f4e6;
+    background: linear-gradient(to bottom, #d5f4e6, #76d7c4); /* Pier color */
+    clip-path: polygon(0% 50%, 25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%);
 }
-.island-building {
+/* City Buildings - Actual buildings instead of simple icons */
+.city-buildings {
+    position: relative;
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 5px;
+}
+.city-building {
+    position: relative;
+    margin: 2px;
+    image-rendering: pixelated;
+}
+/* Desert Mirage Buildings */
+.building-house-1 {
+    width: 30px;
+    height: 40px;
+    background: linear-gradient(to bottom, #d35400, #a04000);
+    border: 1px solid #7e3c00;
+}
+.building-house-1::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 30px;
+    height: 10px;
+    background: #a04000;
+    clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+}
+.building-house-1::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    width: 10px;
+    height: 15px;
+    background: #87CEEB;
+}
+.building-house-2 {
+    width: 25px;
+    height: 35px;
+    background: linear-gradient(to bottom, #d35400, #a04000);
+    border: 1px solid #7e3c00;
+}
+.building-house-2::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 0;
+    width: 25px;
+    height: 8px;
+    background: #a04000;
+    clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+}
+.building-shop {
+    width: 35px;
+    height: 30px;
+    background: linear-gradient(to bottom, #f39c12, #d68910);
+    border: 1px solid #b9770e;
+}
+.building-shop::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    width: 8px;
+    height: 8px;
+    background: #87CEEB;
+}
+.building-shop::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    right: 5px;
+    width: 8px;
+    height: 8px;
+    background: #87CEEB;
+}
+.building-saloon {
     width: 40px;
-    height: 50px;
-    margin-bottom: 5px;
+    height: 35px;
+    background: linear-gradient(to bottom, #e74c3c, #c0392b);
+    border: 1px solid #922b21;
 }
-.island-name {
+.building-saloon::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 30px;
+    height: 5px;
+    background: #f1c40f;
+}
+.building-saloon::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 10px;
+    height: 15px;
+    background: #8b4513;
+}
+.building-bank {
+    width: 30px;
+    height: 45px;
+    background: linear-gradient(to bottom, #3498db, #2980b9);
+    border: 1px solid #1f618d;
+}
+.building-bank::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 30px;
+    height: 10px;
+    background: #2980b9;
+    clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+}
+.building-bank::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    width: 10px;
+    height: 10px;
+    background: #87CEEB;
+}
+/* Rocket Bay Buildings */
+.building-rocket {
+    width: 15px;
+    height: 50px;
+    background: linear-gradient(to bottom, #e74c3c, #c0392b);
+    border: 1px solid #922b21;
+    border-radius: 50% 50% 0 0;
+}
+.building-rocket::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 2.5px;
+    width: 10px;
+    height: 10px;
+    background: #f39c12;
+    clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+}
+.building-rocket::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 3px;
+    width: 9px;
+    height: 5px;
+    background: #3498db;
+}
+.building-lab {
+    width: 40px;
+    height: 30px;
+    background: linear-gradient(to bottom, #9b59b6, #8e44ad);
+    border: 1px solid #6c3483;
+}
+.building-lab::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 10px;
+    height: 10px;
+    background: #f1c40f;
+}
+.building-lab::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 10px;
+    height: 10px;
+    background: #f1c40f;
+}
+.building-hangar {
+    width: 50px;
+    height: 25px;
+    background: linear-gradient(to bottom, #34495e, #2c3e50);
+    border: 1px solid #1b2631;
+}
+.building-hangar::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: 0;
+    width: 50px;
+    height: 15px;
+    background: #2c3e50;
+    clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+}
+.building-control {
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(to bottom, #3498db, #2980b9);
+    border: 1px solid #1f618d;
+}
+.building-control::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 25px;
+    height: 5px;
+    background: #ecf0f1;
+}
+.building-control::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 5px;
+    width: 25px;
+    height: 5px;
+    background: #ecf0f1;
+}
+/* Carnival Core Buildings */
+.building-ferris {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #e74c3c;
+    border-radius: 50%;
+}
+.building-ferris::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    border: 2px solid #e74c3c;
+    border-radius: 50%;
+}
+.building-ferris::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 5px;
+    height: 5px;
+    background: #e74c3c;
+    border-radius: 50%;
+}
+.building-carousel {
+    width: 35px;
+    height: 25px;
+    background: linear-gradient(to bottom, #f39c12, #d68910);
+    border: 1px solid #b9770e;
+    border-radius: 50% 50% 0 0;
+}
+.building-carousel::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 5px;
+    width: 8px;
+    height: 8px;
+    background: #e74c3c;
+    border-radius: 50%;
+}
+.building-carousel::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: 5px;
+    width: 8px;
+    height: 8px;
+    background: #3498db;
+    border-radius: 50%;
+}
+.building-tent {
+    width: 40px;
+    height: 30px;
+    background: linear-gradient(to bottom, #e74c3c, #c0392b);
+    border: 1px solid #922b21;
+    clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+}
+.building-game {
+    width: 30px;
+    height: 25px;
+    background: linear-gradient(to bottom, #9b59b6, #8e44ad);
+    border: 1px solid #6c3483;
+}
+.building-game::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 8px;
+    height: 8px;
+    background: #f1c40f;
+}
+.building-game::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 8px;
+    height: 8px;
+    background: #e74c3c;
+}
+/* Treehouse Heights Buildings */
+.building-treehouse-1 {
+    width: 25px;
+    height: 30px;
+    background: linear-gradient(to bottom, #8b4513, #654321);
+    border: 1px solid #4a2c17;
+}
+.building-treehouse-1::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: -10px;
+    width: 45px;
+    height: 20px;
+    background: #27ae60;
+    border-radius: 50%;
+}
+.building-treehouse-2 {
+    width: 20px;
+    height: 25px;
+    background: linear-gradient(to bottom, #8b4513, #654321);
+    border: 1px solid #4a2c17;
+}
+.building-treehouse-2::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: -8px;
+    width: 36px;
+    height: 16px;
+    background: #27ae60;
+    border-radius: 50%;
+}
+.building-treehouse-3 {
+    width: 30px;
+    height: 35px;
+    background: linear-gradient(to bottom, #8b4513, #654321);
+    border: 1px solid #4a2c17;
+}
+.building-treehouse-3::before {
+    content: '';
+    position: absolute;
+    top: -18px;
+    left: -12px;
+    width: 54px;
+    height: 24px;
+    background: #27ae60;
+    border-radius: 50%;
+}
+.building-bridge {
+    width: 40px;
+    height: 10px;
+    background: linear-gradient(to bottom, #8b4513, #654321);
+    border: 1px solid #4a2c17;
+}
+.building-bridge::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 5px;
+    width: 5px;
+    height: 5px;
+    background: #8b4513;
+}
+.building-bridge::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: 5px;
+    width: 5px;
+    height: 5px;
+    background: #8b4513;
+}
+/* Frostfall Ridge Buildings */
+.building-igloo {
+    width: 30px;
+    height: 20px;
+    background: linear-gradient(to bottom, #ecf0f1, #bdc3c7);
+    border: 1px solid #95a5a6;
+    border-radius: 50% 50% 0 0;
+}
+.building-igloo::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    width: 10px;
+    height: 10px;
+    background: #3498db;
+    border-radius: 50%;
+}
+.building-cabin {
+    width: 35px;
+    height: 30px;
+    background: linear-gradient(to bottom, #8b4513, #654321);
+    border: 1px solid #4a2c17;
+}
+.building-cabin::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 35px;
+    height: 10px;
+    background: #654321;
+    clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+}
+.building-cabin::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    width: 10px;
+    height: 15px;
+    background: #3498db;
+}
+.building-factory {
+    width: 40px;
+    height: 35px;
+    background: linear-gradient(to bottom, #95a5a6, #7f8c8d);
+    border: 1px solid #5d6d7e;
+}
+.building-factory::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: 15px;
+    width: 10px;
+    height: 15px;
+    background: #e74c3c;
+}
+.building-factory::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 8px;
+    height: 8px;
+    background: #3498db;
+}
+.building-lodge {
+    width: 45px;
+    height: 30px;
+    background: linear-gradient(to bottom, #8b4513, #654321);
+    border: 1px solid #4a2c17;
+}
+.building-lodge::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 0;
+    width: 45px;
+    height: 12px;
+    background: #654321;
+    clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+}
+.building-lodge::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 15px;
+    width: 15px;
+    height: 15px;
+    background: #3498db;
+}
+/* Jungle Reef Buildings */
+.building-hut {
+    width: 30px;
+    height: 25px;
+    background: linear-gradient(to bottom, #8b4513, #654321);
+    border: 1px solid #4a2c17;
+}
+.building-hut::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: -5px;
+    width: 40px;
+    height: 15px;
+    background: #27ae60;
+    clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+}
+.building-dock {
+    width: 50px;
+    height: 10px;
+    background: linear-gradient(to bottom, #8b4513, #654321);
+    border: 1px solid #4a2c17;
+}
+.building-dock::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    width: 10px;
+    height: 20px;
+    background: #8b4513;
+}
+.building-lighthouse {
+    width: 15px;
+    height: 40px;
+    background: linear-gradient(to bottom, #ecf0f1, #bdc3c7);
+    border: 1px solid #95a5a6;
+    clip-path: polygon(40% 0%, 60% 0%, 100% 100%, 0% 100%);
+}
+.building-lighthouse::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 2px;
+    width: 11px;
+    height: 5px;
+    background: #e74c3c;
+}
+.building-lighthouse::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 2px;
+    width: 11px;
+    height: 5px;
+    background: #f39c12;
+}
+.building-market {
+    width: 40px;
+    height: 25px;
+    background: linear-gradient(to bottom, #f39c12, #d68910);
+    border: 1px solid #b9770e;
+}
+.building-market::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 40px;
+    height: 10px;
+    background: #d68910;
+    clip-path: polygon(0% 100%, 10% 0%, 90% 0%, 100% 100%);
+}
+.building-market::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 30px;
+    height: 5px;
+    background: #e74c3c;
+}
+/* Haunted Hollow Buildings */
+.building-mansion {
+    width: 40px;
+    height: 35px;
+    background: linear-gradient(to bottom, #2c3e50, #1b2631);
+    border: 1px solid #0b0c10;
+}
+.building-mansion::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: 0;
+    width: 40px;
+    height: 15px;
+    background: #1b2631;
+    clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+}
+.building-mansion::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    width: 10px;
+    height: 15px;
+    background: #e74c3c;
+}
+.building-graveyard {
+    width: 40px;
+    height: 20px;
+    background: linear-gradient(to bottom, #2c3e50, #1b2631);
+    border: 1px solid #0b0c10;
+}
+.building-graveyard::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 5px;
+    width: 5px;
+    height: 10px;
+    background: #95a5a6;
+}
+.building-graveyard::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: 5px;
+    width: 5px;
+    height: 10px;
+    background: #95a5a6;
+}
+.building-church {
+    width: 30px;
+    height: 40px;
+    background: linear-gradient(to bottom, #2c3e50, #1b2631);
+    border: 1px solid #0b0c10;
+}
+.building-church::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 10px;
+    width: 10px;
+    height: 20px;
+    background: #1b2631;
+    clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+}
+.building-church::after {
+    content: '';
+    position: absolute;
+    top: -25px;
+    left: 12px;
+    width: 6px;
+    height: 5px;
+    background: #e74c3c;
+}
+.building-gate {
+    width: 35px;
+    height: 30px;
+    background: linear-gradient(to bottom, #8b4513, #654321);
+    border: 1px solid #4a2c17;
+}
+.building-gate::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 15px;
+    width: 5px;
+    height: 30px;
+    background: #2c3e50;
+}
+.building-gate::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 10px;
+    height: 10px;
+    background: #e74c3c;
+}
+/* Tech Capital Buildings */
+.building-skyscraper-1 {
+    width: 20px;
+    height: 50px;
+    background: linear-gradient(to bottom, #3498db, #2980b9);
+    border: 1px solid #1f618d;
+}
+.building-skyscraper-1::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 10px;
+    height: 5px;
+    background: #f1c40f;
+}
+.building-skyscraper-1::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 5px;
+    width: 10px;
+    height: 5px;
+    background: #f1c40f;
+}
+.building-skyscraper-2 {
+    width: 25px;
+    height: 45px;
+    background: linear-gradient(to bottom, #9b59b6, #8e44ad);
+    border: 1px solid #6c3483;
+}
+.building-skyscraper-2::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 7px;
+    width: 10px;
+    height: 5px;
+    background: #ecf0f1;
+}
+.building-skyscraper-2::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 7px;
+    width: 10px;
+    height: 5px;
+    background: #ecf0f1;
+}
+.building-dome {
+    width: 30px;
+    height: 25px;
+    background: linear-gradient(to bottom, #3498db, #2980b9);
+    border: 1px solid #1f618d;
+    border-radius: 50% 50% 0 0;
+}
+.building-dome::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 5px;
+    width: 20px;
+    height: 10px;
+    background: #e74c3c;
+    border-radius: 50%;
+}
+.building-lab-2 {
+    width: 35px;
+    height: 30px;
+    background: linear-gradient(to bottom, #1abc9c, #16a085);
+    border: 1px solid #0e6655;
+}
+.building-lab-2::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 10px;
+    height: 10px;
+    background: #f1c40f;
+}
+.building-lab-2::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 10px;
+    height: 10px;
+    background: #e74c3c;
+}
+/* Candy Corners Buildings */
+.building-candy-shop {
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(to bottom, #e74c3c, #c0392b);
+    border: 1px solid #922b21;
+}
+.building-candy-shop::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 30px;
+    height: 10px;
+    background: #f39c12;
+    clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+}
+.building-candy-shop::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 10px;
+    height: 10px;
+    background: #f1c40f;
+}
+.building-gingerbread {
+    width: 35px;
+    height: 25px;
+    background: linear-gradient(to bottom, #d35400, #a04000);
+    border: 1px solid #7e3c00;
+}
+.building-gingerbread::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 35px;
+    height: 10px;
+    background: #f1c40f;
+    clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+}
+.building-gingerbread::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 12px;
+    width: 10px;
+    height: 10px;
+    background: #e74c3c;
+}
+.building-factory-2 {
+    width: 40px;
+    height: 30px;
+    background: linear-gradient(to bottom, #9b59b6, #8e44ad);
+    border: 1px solid #6c3483;
+}
+.building-factory-2::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: 15px;
+    width: 10px;
+    height: 15px;
+    background: #e74c3c;
+}
+.building-factory-2::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 8px;
+    height: 8px;
+    background: #f1c40f;
+}
+.building-fair {
+    width: 45px;
+    height: 25px;
+    background: linear-gradient(to bottom, #f39c12, #d68910);
+    border: 1px solid #b9770e;
+}
+.building-fair::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    width: 25px;
+    height: 10px;
+    background: #e74c3c;
+    clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+}
+.building-fair::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 8px;
+    height: 8px;
+    background: #3498db;
+}
+/* Peanuts Pier Buildings */
+.building-pier {
+    width: 50px;
+    height: 15px;
+    background: linear-gradient(to bottom, #8b4513, #654321);
+    border: 1px solid #4a2c17;
+}
+.building-pier::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    width: 10px;
+    height: 15px;
+    background: #8b4513;
+}
+.building-pier::after {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 22px;
+    width: 6px;
+    height: 5px;
+    background: #e74c3c;
+}
+.building-ferris-2 {
+    width: 35px;
+    height: 35px;
+    border: 2px solid #e74c3c;
+    border-radius: 50%;
+}
+.building-ferris-2::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25px;
+    height: 25px;
+    border: 2px solid #e74c3c;
+    border-radius: 50%;
+}
+.building-ferris-2::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 5px;
+    height: 5px;
+    background: #e74c3c;
+    border-radius: 50%;
+}
+.building-arcade {
+    width: 40px;
+    height: 25px;
+    background: linear-gradient(to bottom, #3498db, #2980b9);
+    border: 1px solid #1f618d;
+}
+.building-arcade::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 8px;
+    height: 8px;
+    background: #f1c40f;
+}
+.building-arcade::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 8px;
+    height: 8px;
+    background: #f1c40f;
+}
+.building-restaurant {
+    width: 35px;
+    height: 30px;
+    background: linear-gradient(to bottom, #e74c3c, #c0392b);
+    border: 1px solid #922b21;
+}
+.building-restaurant::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 35px;
+    height: 10px;
+    background: #c0392b;
+    clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+}
+.building-restaurant::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    width: 10px;
+    height: 15px;
+    background: #f1c40f;
+}
+/* City names and levels */
+.city-name {
     font-size: 14px;
     font-weight: bold;
     color: #333;
     text-align: center;
     margin-bottom: 5px;
     font-family: 'Comic Sans MS', cursive, sans-serif;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
 }
-.island-level {
+.city-level {
     font-size: 12px;
     color: #555;
     font-family: 'Comic Sans MS', cursive, sans-serif;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
 }
-.island-cloud-cover {
+.city-cloud-cover {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background: white;
-    border-radius: 50%;
     opacity: 0.8;
     z-index: 5;
     pointer-events: none;
@@ -268,22 +1224,66 @@ body {
     top: 70%;
     left: 50%;
 }
-.map-wave {
-    background: #76d7c4;
-    border-radius: 50%;
-    opacity: 0.6;
+/* Map features - rivers, mountains, forests, etc. */
+.map-feature {
+    position: absolute;
+    z-index: 1;
 }
-.wave-1 {
-    width: 200px;
-    height: 100px;
-    top: 40%;
+.river {
+    width: 5%;
+    height: 80%;
+    top: 10%;
+    left: 48%;
+    background: linear-gradient(to bottom, #3498db, #2980b9);
+    transform: rotate(5deg);
+}
+.mountain-range-1 {
+    width: 30%;
+    height: 20%;
+    top: 5%;
     left: 5%;
+    background: linear-gradient(to bottom, #95a5a6, #7f8c8d);
+    clip-path: polygon(0% 100%, 20% 40%, 40% 60%, 60% 30%, 80% 70%, 100% 50%, 100% 100%);
 }
-.wave-2 {
-    width: 180px;
-    height: 90px;
-    top: 65%;
-    left: 75%;
+.mountain-range-2 {
+    width: 25%;
+    height: 15%;
+    top: 75%;
+    left: 70%;
+    background: linear-gradient(to bottom, #95a5a6, #7f8c8d);
+    clip-path: polygon(0% 100%, 15% 50%, 35% 70%, 55% 40%, 75% 60%, 100% 30%, 100% 100%);
+}
+.forest-1 {
+    width: 20%;
+    height: 25%;
+    top: 40%;
+    left: 20%;
+    background: linear-gradient(to bottom, #27ae60, #229954);
+    border-radius: 50%;
+}
+.forest-2 {
+    width: 15%;
+    height: 20%;
+    top: 30%;
+    left: 65%;
+    background: linear-gradient(to bottom, #27ae60, #229954);
+    border-radius: 50%;
+}
+.desert {
+    width: 25%;
+    height: 20%;
+    top: 15%;
+    left: 15%;
+    background: linear-gradient(to bottom, #f5d76e, #f1c40f);
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+}
+.lake {
+    width: 15%;
+    height: 10%;
+    top: 60%;
+    left: 40%;
+    background: linear-gradient(to bottom, #3498db, #2980b9);
+    border-radius: 50%;
 }
 /* City Scene Styles - Updated to match Stardew Valley style */
 .city-scene-container {
@@ -470,7 +1470,7 @@ body {
 .character-hand-right {
     right: -6px;
 }
-/* Pixel Building Styles - Stardew Valley style */
+/* Pixel Building Styles - Stardew Valley style with more detail */
 .pixel-building {
     position: absolute;
     cursor: pointer;
@@ -484,9 +1484,118 @@ body {
 .pixel-building-base {
     width: 80px;
     height: 80px;
-    background-color: #8D6E63;
-    border: 2px solid #5D4037;
+    position: relative;
     image-rendering: pixelated;
+}
+.pixel-building-roof {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 30px;
+    background-color: #8D6E63;
+    clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+    z-index: 3;
+}
+.pixel-building-wall {
+    position: absolute;
+    top: 25px;
+    left: 0;
+    width: 80px;
+    height: 55px;
+    background-color: #BCAAA4;
+    z-index: 2;
+}
+.pixel-building-door {
+    position: absolute;
+    bottom: 0;
+    left: 30px;
+    width: 20px;
+    height: 30px;
+    background-color: #5D4037;
+    z-index: 3;
+}
+.pixel-building-window {
+    position: absolute;
+    top: 40px;
+    left: 15px;
+    width: 15px;
+    height: 15px;
+    background-color: #81D4FA;
+    z-index: 3;
+}
+.pixel-building-window::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    background: linear-gradient(45deg, transparent 45%, #5D4037 45%, #5D4037 55%, transparent 55%);
+}
+.pixel-building-chimney {
+    position: absolute;
+    top: 5px;
+    left: 55px;
+    width: 15px;
+    height: 25px;
+    background-color: #5D4037;
+    z-index: 4;
+}
+.pixel-building-sign {
+    position: absolute;
+    top: 35px;
+    right: 10px;
+    width: 20px;
+    height: 15px;
+    background-color: #FFEB3B;
+    z-index: 3;
+}
+.pixel-building-columns {
+    position: absolute;
+    top: 25px;
+    left: 10px;
+    width: 60px;
+    height: 55px;
+    background: repeating-linear-gradient(
+        90deg,
+        #BCAAA4,
+        #BCAAA4 10px,
+        #8D6E63 10px,
+        #8D6E63 20px
+    );
+    z-index: 2;
+}
+/* Building-specific styles */
+.building-house .pixel-building-roof {
+    background-color: #FFCC80;
+}
+.building-house .pixel-building-wall {
+    background-color: #FFE0B2;
+}
+.building-shop .pixel-building-roof {
+    background-color: #A5D6A7;
+}
+.building-shop .pixel-building-wall {
+    background-color: #C8E6C9;
+}
+.building-saloon .pixel-building-roof {
+    background-color: #EF9A9A;
+}
+.building-saloon .pixel-building-wall {
+    background-color: #FFCDD2;
+}
+.building-blacksmith .pixel-building-roof {
+    background-color: #BCAAA4;
+}
+.building-blacksmith .pixel-building-wall {
+    background-color: #D7CCC8;
+}
+.building-library .pixel-building-roof {
+    background-color: #90CAF9;
+}
+.building-library .pixel-building-wall {
+    background-color: #BBDEFB;
 }
 .pixel-building-name {
     font-weight: bold;
@@ -496,26 +1605,6 @@ body {
     margin-top: 5px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
     font-family: 'Press Start 2P', cursive;
-}
-.building-house .pixel-building-base {
-    background-color: #FFCC80;
-    border: 2px solid #FFA726;
-}
-.building-shop .pixel-building-base {
-    background-color: #A5D6A7;
-    border: 2px solid #66BB6A;
-}
-.building-saloon .pixel-building-base {
-    background-color: #EF9A9A;
-    border: 2px solid #EF5350;
-}
-.building-blacksmith .pixel-building-base {
-    background-color: #BCAAA4;
-    border: 2px solid #8D6E63;
-}
-.building-library .pixel-building-base {
-    background-color: #90CAF9;
-    border: 2px solid #42A5F5;
 }
 /* Pixel Path Styles - Stardew Valley style */
 .pixel-path {
