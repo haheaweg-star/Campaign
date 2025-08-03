@@ -17,8 +17,6 @@
                 <div class="map-decoration map-cloud cloud-2"></div>
                 <div class="map-decoration map-cloud cloud-3"></div>
                 <div class="map-decoration map-cloud cloud-4"></div>
-                <div class="map-decoration map-wave wave-1"></div>
-                <div class="map-decoration map-wave wave-2"></div>
                 
                 <!-- Blimp -->
                 <div class="blimp" id="blimp">
@@ -26,76 +24,136 @@
                     <div class="blimp-basket"></div>
                 </div>
                 
-                <!-- Islands -->
-                <div class="map-island island-1" data-city="1" data-level="0">
-                    <div class="island-building" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="20" y="40" width="60" height="60" fill="%23d4af37"/><polygon points="10,40 50,10 90,40" fill="%23b8860b"/></svg>'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
-                    <div class="island-name">Desert Mirage</div>
-                    <div class="island-level">Level 0</div>
-                    <div class="island-cloud-cover" style="display: none;"></div>
+                <!-- Cities with actual shapes -->
+                <div class="map-city city-1" data-city="1" data-level="0">
+                    <div class="city-buildings">
+                        <div class="city-building building-house-1"></div>
+                        <div class="city-building building-house-2"></div>
+                        <div class="city-building building-shop"></div>
+                        <div class="city-building building-saloon"></div>
+                        <div class="city-building building-bank"></div>
+                    </div>
+                    <div class="city-name">Desert Mirage</div>
+                    <div class="city-level">Level 0</div>
+                    <div class="city-cloud-cover" style="display: none;"></div>
                 </div>
                 
-                <div class="map-island island-2" data-city="2" data-level="50">
-                    <div class="island-building" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="30" y="30" width="40" height="50" fill="%234285f4"/><polygon points="20,30 50,10 80,30" fill="%233367d6"/></svg>'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
-                    <div class="island-name">Rocket Bay</div>
-                    <div class="island-level">Level 50</div>
-                    <div class="island-cloud-cover" style="display: none;"></div>
+                <div class="map-city city-2" data-city="2" data-level="50">
+                    <div class="city-buildings">
+                        <div class="city-building building-rocket"></div>
+                        <div class="city-building building-lab"></div>
+                        <div class="city-building building-hangar"></div>
+                        <div class="city-building building-control"></div>
+                    </div>
+                    <div class="city-name">Rocket Bay</div>
+                    <div class="city-level">Level 50</div>
+                    <div class="city-cloud-cover" style="display: none;"></div>
                 </div>
                 
-                <div class="map-island island-3" data-city="3" data-level="100">
-                    <div class="island-building" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="25" y="40" width="50" height="50" fill="%23ea4335"/><polygon points="15,40 50,15 85,40" fill="%23c5221f"/><circle cx="50" cy="30" r="15" fill="%23fbbc05"/></svg>'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
-                    <div class="island-name">Carnival Core</div>
-                    <div class="island-level">Level 100</div>
-                    <div class="island-cloud-cover" style="display: none;"></div>
+                <div class="map-city city-3" data-city="3" data-level="100">
+                    <div class="city-buildings">
+                        <div class="city-building building-ferris"></div>
+                        <div class="city-building building-carousel"></div>
+                        <div class="city-building building-tent"></div>
+                        <div class="city-building building-game"></div>
+                    </div>
+                    <div class="city-name">Carnival Core</div>
+                    <div class="city-level">Level 100</div>
+                    <div class="city-cloud-cover" style="display: none;"></div>
                 </div>
                 
-                <div class="map-island island-4" data-city="4" data-level="200">
-                    <div class="island-building" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="20" y="60" width="60" height="30" fill="%238b4513"/><rect x="35" y="40" width="30" height="20" fill="%23a0522d"/><polygon points="25,40 50,20 75,40" fill="%23654321"/></svg>'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
-                    <div class="island-name">Treehouse Heights</div>
-                    <div class="island-level">Level 200</div>
-                    <div class="island-cloud-cover" style="display: none;"></div>
+                <div class="map-city city-4" data-city="4" data-level="200">
+                    <div class="city-buildings">
+                        <div class="city-building building-treehouse-1"></div>
+                        <div class="city-building building-treehouse-2"></div>
+                        <div class="city-building building-treehouse-3"></div>
+                        <div class="city-building building-bridge"></div>
+                    </div>
+                    <div class="city-name">Treehouse Heights</div>
+                    <div class="city-level">Level 200</div>
+                    <div class="city-cloud-cover" style="display: none;"></div>
                 </div>
                 
-                <div class="map-island island-5" data-city="5" data-level="300">
-                    <div class="island-building" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="30" y="40" width="40" height="50" fill="%23ffffff"/><polygon points="20,40 50,10 80,40" fill="%23e0e0e0"/><rect x="35" y="50" width="30" height="30" fill="%23bbdefb"/></svg>'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
-                    <div class="island-name">Frostfall Ridge</div>
-                    <div class="island-level">Level 300</div>
-                    <div class="island-cloud-cover" style="display: none;"></div>
+                <div class="map-city city-5" data-city="5" data-level="300">
+                    <div class="city-buildings">
+                        <div class="city-building building-igloo"></div>
+                        <div class="city-building building-cabin"></div>
+                        <div class="city-building building-factory"></div>
+                        <div class="city-building building-lodge"></div>
+                    </div>
+                    <div class="city-name">Frostfall Ridge</div>
+                    <div class="city-level">Level 300</div>
+                    <div class="city-cloud-cover" style="display: none;"></div>
                 </div>
                 
-                <div class="map-island island-6" data-city="6" data-level="400">
-                    <div class="island-building" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="25" y="50" width="50" height="40" fill="%2334a853"/><polygon points="15,50 50,20 85,50" fill="%232d8e47"/><circle cx="30" cy="60" r="5" fill="%23fbbc05"/><circle cx="50" cy="60" r="5" fill="%23ea4335"/><circle cx="70" cy="60" r="5" fill="%234285f4"/></svg>'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
-                    <div class="island-name">Jungle Reef</div>
-                    <div class="island-level">Level 400</div>
-                    <div class="island-cloud-cover" style="display: none;"></div>
+                <div class="map-city city-6" data-city="6" data-level="400">
+                    <div class="city-buildings">
+                        <div class="city-building building-hut"></div>
+                        <div class="city-building building-dock"></div>
+                        <div class="city-building building-lighthouse"></div>
+                        <div class="city-building building-market"></div>
+                    </div>
+                    <div class="city-name">Jungle Reef</div>
+                    <div class="city-level">Level 400</div>
+                    <div class="city-cloud-cover" style="display: none;"></div>
                 </div>
                 
-                <div class="map-island island-7" data-city="7" data-level="600">
-                    <div class="island-building" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="30" y="40" width="40" height="50" fill="%235f6368"/><polygon points="20,40 50,10 80,40" fill="%233c4043"/><path d="M35,25 Q50,15 65,25" stroke="%23ffffff" stroke-width="3" fill="none"/><circle cx="40" cy="35" r="3" fill="%23ffffff"/><circle cx="60" cy="35" r="3" fill="%23ffffff"/></svg>'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
-                    <div class="island-name">Haunted Hollow</div>
-                    <div class="island-level">Level 600</div>
-                    <div class="island-cloud-cover" style="display: none;"></div>
+                <div class="map-city city-7" data-city="7" data-level="600">
+                    <div class="city-buildings">
+                        <div class="city-building building-mansion"></div>
+                        <div class="city-building building-graveyard"></div>
+                        <div class="city-building building-church"></div>
+                        <div class="city-building building-gate"></div>
+                    </div>
+                    <div class="city-name">Haunted Hollow</div>
+                    <div class="city-level">Level 600</div>
+                    <div class="city-cloud-cover" style="display: none;"></div>
                 </div>
                 
-                <div class="map-island island-8" data-city="8" data-level="750">
-                    <div class="island-building" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="25" y="30" width="50" height="60" fill="%234285f4"/><polygon points="15,30 50,5 85,30" fill="%233367d6"/><rect x="35" y="40" width="30" height="20" fill="%23ffffff"/><rect x="35" y="65" width="30" height="20" fill="%23ffffff"/></svg>'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
-                    <div class="island-name">Tech Capital</div>
-                    <div class="island-level">Level 750</div>
-                    <div class="island-cloud-cover" style="display: none;"></div>
+                <div class="map-city city-8" data-city="8" data-level="750">
+                    <div class="city-buildings">
+                        <div class="city-building building-skyscraper-1"></div>
+                        <div class="city-building building-skyscraper-2"></div>
+                        <div class="city-building building-dome"></div>
+                        <div class="city-building building-lab-2"></div>
+                    </div>
+                    <div class="city-name">Tech Capital</div>
+                    <div class="city-level">Level 750</div>
+                    <div class="city-cloud-cover" style="display: none;"></div>
                 </div>
                 
-                <div class="map-island island-9" data-city="9" data-level="900">
-                    <div class="island-building" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="30" y="40" width="40" height="50" fill="%23fbbc05"/><polygon points="20,40 50,10 80,40" fill="%23f9ab00"/><rect x="35" y="50" width="30" height="10" fill="%23ea4335"/><rect x="35" y="65" width="30" height="10" fill="%234285f4"/><rect x="35" y="80" width="30" height="10" fill="%2334a853"/></svg>'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
-                    <div class="island-name">Candy Corners</div>
-                    <div class="island-level">Level 900</div>
-                    <div class="island-cloud-cover" style="display: none;"></div>
+                <div class="map-city city-9" data-city="9" data-level="900">
+                    <div class="city-buildings">
+                        <div class="city-building building-candy-shop"></div>
+                        <div class="city-building building-gingerbread"></div>
+                        <div class="city-building building-factory-2"></div>
+                        <div class="city-building building-fair"></div>
+                    </div>
+                    <div class="city-name">Candy Corners</div>
+                    <div class="city-level">Level 900</div>
+                    <div class="city-cloud-cover" style="display: none;"></div>
                 </div>
                 
-                <div class="map-island island-10" data-city="10" data-level="1000">
-                    <div class="island-building" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="20" y="50" width="60" height="40" fill="%23ea4335"/><polygon points="10,50 50,20 90,50" fill="%23c5221f"/><rect x="40" y="60" width="20" height="20" fill="%23fbbc05"/></svg>'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
-                    <div class="island-name">Peanuts Pier</div>
-                    <div class="island-level">Level 1000</div>
-                    <div class="island-cloud-cover" style="display: none;"></div>
+                <div class="map-city city-10" data-city="10" data-level="1000">
+                    <div class="city-buildings">
+                        <div class="city-building building-pier"></div>
+                        <div class="city-building building-ferris-2"></div>
+                        <div class="city-building building-arcade"></div>
+                        <div class="city-building building-restaurant"></div>
+                    </div>
+                    <div class="city-name">Peanuts Pier</div>
+                    <div class="city-level">Level 1000</div>
+                    <div class="city-cloud-cover" style="display: none;"></div>
                 </div>
+                
+                <!-- Map features -->
+                <div class="map-feature river"></div>
+                <div class="map-feature mountain-range-1"></div>
+                <div class="map-feature mountain-range-2"></div>
+                <div class="map-feature forest-1"></div>
+                <div class="map-feature forest-2"></div>
+                <div class="map-feature desert"></div>
+                <div class="map-feature lake"></div>
             </div>
         </div>
         
@@ -141,27 +199,57 @@
                     
                     <!-- Stardew Valley Style Pixel Buildings -->
                     <div class="pixel-building building-house" data-building="house" style="top: 15%; left: 15%;">
-                        <div class="pixel-building-base"></div>
+                        <div class="pixel-building-base">
+                            <div class="pixel-building-roof"></div>
+                            <div class="pixel-building-wall"></div>
+                            <div class="pixel-building-door"></div>
+                            <div class="pixel-building-window"></div>
+                            <div class="pixel-building-chimney"></div>
+                        </div>
                         <div class="pixel-building-name">Farmhouse</div>
                     </div>
                     
                     <div class="pixel-building building-shop" data-building="shop" style="top: 10%; left: 55%;">
-                        <div class="pixel-building-base"></div>
+                        <div class="pixel-building-base">
+                            <div class="pixel-building-roof"></div>
+                            <div class="pixel-building-wall"></div>
+                            <div class="pixel-building-door"></div>
+                            <div class="pixel-building-window"></div>
+                            <div class="pixel-building-sign"></div>
+                        </div>
                         <div class="pixel-building-name">Pierre's Shop</div>
                     </div>
                     
                     <div class="pixel-building building-saloon" data-building="saloon" style="top: 50%; left: 25%;">
-                        <div class="pixel-building-base"></div>
+                        <div class="pixel-building-base">
+                            <div class="pixel-building-roof"></div>
+                            <div class="pixel-building-wall"></div>
+                            <div class="pixel-building-door"></div>
+                            <div class="pixel-building-window"></div>
+                            <div class="pixel-building-sign"></div>
+                        </div>
                         <div class="pixel-building-name">Stardrop Saloon</div>
                     </div>
                     
                     <div class="pixel-building building-blacksmith" data-building="blacksmith" style="top: 60%; left: 70%;">
-                        <div class="pixel-building-base"></div>
+                        <div class="pixel-building-base">
+                            <div class="pixel-building-roof"></div>
+                            <div class="pixel-building-wall"></div>
+                            <div class="pixel-building-door"></div>
+                            <div class="pixel-building-window"></div>
+                            <div class="pixel-building-chimney"></div>
+                        </div>
                         <div class="pixel-building-name">Blacksmith</div>
                     </div>
                     
                     <div class="pixel-building building-library" data-building="library" style="top: 40%; left: 80%;">
-                        <div class="pixel-building-base"></div>
+                        <div class="pixel-building-base">
+                            <div class="pixel-building-roof"></div>
+                            <div class="pixel-building-wall"></div>
+                            <div class="pixel-building-door"></div>
+                            <div class="pixel-building-window"></div>
+                            <div class="pixel-building-columns"></div>
+                        </div>
                         <div class="pixel-building-name">Library</div>
                     </div>
                     
