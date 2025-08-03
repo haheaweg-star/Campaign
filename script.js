@@ -407,11 +407,11 @@ function initGame() {
     // Update cloud covers based on player level
     updateCloudCovers();
     
-    // Add click event to map islands
-    document.querySelectorAll('.map-island').forEach(island => {
-        island.addEventListener('click', () => {
-            const cityId = parseInt(island.getAttribute('data-city'));
-            const cityLevel = parseInt(island.getAttribute('data-level'));
+    // Add click event to map cities
+    document.querySelectorAll('.map-city').forEach(city => {
+        city.addEventListener('click', () => {
+            const cityId = parseInt(city.getAttribute('data-city'));
+            const cityLevel = parseInt(city.getAttribute('data-level'));
             
             // Check if player level is sufficient
             if (gameState.playerLevel < cityLevel) {
@@ -419,8 +419,8 @@ function initGame() {
                 return;
             }
             
-            // Move blimp to island
-            moveBlimpToIsland(island);
+            // Move blimp to city
+            moveBlimpToCity(city);
         });
     });
     
@@ -488,9 +488,9 @@ function initGame() {
 }
 // Update cloud covers based on player level
 function updateCloudCovers() {
-    document.querySelectorAll('.map-island').forEach(island => {
-        const cityLevel = parseInt(island.getAttribute('data-level'));
-        const cloudCover = island.querySelector('.island-cloud-cover');
+    document.querySelectorAll('.map-city').forEach(city => {
+        const cityLevel = parseInt(city.getAttribute('data-level'));
+        const cloudCover = city.querySelector('.city-cloud-cover');
         
         if (gameState.playerLevel < cityLevel) {
             cloudCover.style.display = 'block';
@@ -499,32 +499,32 @@ function updateCloudCovers() {
         }
     });
 }
-// Move blimp to island
-function moveBlimpToIsland(island) {
+// Move blimp to city
+function moveBlimpToCity(city) {
     if (gameState.blimpMoving) return;
     
     gameState.blimpMoving = true;
-    gameState.blimpTarget = island;
+    gameState.blimpTarget = city;
     
-    const islandRect = island.getBoundingClientRect();
+    const cityRect = city.getBoundingClientRect();
     const mapRect = document.querySelector('.poptropica-map').getBoundingClientRect();
     
-    const targetX = ((islandRect.left + islandRect.width / 2 - mapRect.left) / mapRect.width) * 100;
-    const targetY = ((islandRect.top + islandRect.height / 2 - mapRect.top - 30) / mapRect.height) * 100;
+    const targetX = ((cityRect.left + cityRect.width / 2 - mapRect.left) / mapRect.width) * 100;
+    const targetY = ((cityRect.top + cityRect.height / 2 - mapRect.top - 30) / mapRect.height) * 100;
     
     blimp.style.left = `${targetX}%`;
     blimp.style.top = `${targetY}%`;
     
-    // After blimp reaches island, enter city
+    // After blimp reaches city, enter city
     setTimeout(() => {
         gameState.blimpMoving = false;
-        enterCity(island);
+        enterCity(city);
     }, 2000);
 }
 // Enter a city
-function enterCity(island) {
-    const cityId = parseInt(island.getAttribute('data-city'));
-    const cityLevel = parseInt(island.getAttribute('data-level'));
+function enterCity(city) {
+    const cityId = parseInt(city.getAttribute('data-city'));
+    const cityLevel = parseInt(city.getAttribute('data-level'));
     
     // Check if player level is sufficient
     if (gameState.playerLevel < cityLevel) {
@@ -1017,9 +1017,9 @@ function showNotification(message) {
     notification.style.transform = 'translateX(-50%)';
     notification.style.background = 'rgba(50, 40, 30, 0.9)';
     notification.style.border = '2px solid #d4af37';
-    notification.style.borderRadius = '10px';
+    notification.style.border-radius = '10px';
     notification.style.padding = '15px 25px';
-    notification.style.zIndex = '30';
+    notification.style.z-index = '30';
     
     document.body.appendChild(notification);
     
