@@ -766,12 +766,20 @@ function updateCharacterPosition() {
     if (keys.a || keys.ArrowLeft) {
         feet.forEach(foot => {
             foot.style.transform = 'rotate(180deg)';
-            foot.style.left = foot.classList.contains('character-foot-left') ? '6px' : '-1px';
+            if (foot.classList.contains('character-foot-left')) {
+                foot.style.left = '6px';
+            } else {
+                foot.style.left = '-1px';
+            }
         });
     } else if (keys.d || keys.ArrowRight) {
         feet.forEach(foot => {
             foot.style.transform = 'rotate(0deg)';
-            foot.style.left = foot.classList.contains('character-foot-left') ? '-1px' : '6px';
+            if (foot.classList.contains('character-foot-left')) {
+                foot.style.left = '-1px';
+            } else {
+                foot.style.left = '6px';
+            }
         });
     }
 }
@@ -1017,9 +1025,9 @@ function showNotification(message) {
     notification.style.transform = 'translateX(-50%)';
     notification.style.background = 'rgba(50, 40, 30, 0.9)';
     notification.style.border = '2px solid #d4af37';
-    notification.style.border-radius = '10px';
+    notification.style.borderRadius = '10px';
     notification.style.padding = '15px 25px';
-    notification.style.z-index = '30';
+    notification.style.zIndex = '30';
     
     document.body.appendChild(notification);
     
